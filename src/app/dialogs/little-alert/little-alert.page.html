@@ -1,0 +1,24 @@
+<ion-content>
+  <div class="custom-alert">
+    <div [class]="imageDivClass?imageDivClass:'div-image-alert'" >
+      <img [src]="image?image:'assets/imgs/campana-de-notificacion.png'" alt="" [class]="imageClass? imageClass:'image-alert'">
+    </div>
+    <div  class="side-title">
+      <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;width: 90%;">
+        <p class="ion-text-center" style="font-size: 0.9em;">{{message?message:'El tiempo de espera tiene un costo y el mismo debe ser cancelado'}}</p>
+        <div class="custom-alert-buttons" >
+          
+          <ion-button color="success" fill="outline" size="small" shape="round" (click)="dismiss()">
+            Cancelar
+          </ion-button>
+          <ion-button color="success" size="small" shape="round" (click)="affirmative()">
+            Aceptar
+          </ion-button>
+        </div>
+      </div>
+      
+      
+      
+    </div>
+  </div>
+</ion-content>

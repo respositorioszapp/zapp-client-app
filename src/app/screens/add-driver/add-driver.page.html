@@ -1,0 +1,68 @@
+<div class="col-md-12 ">
+  <div class="col-5">
+    <app-stepper></app-stepper>
+  </div> 
+</div>
+
+<ion-content>
+  <div class="son-container" style="">
+    <div class="row justify-content-center" style="position: absolute;right: 0;left: 0;bottom: 0;top: 0;margin: auto;height: 200px;" >
+      <!--stepper-->
+      
+      <!--form-->
+      <div class="col-md-11 col-lg-10 col-xl-8 ">
+        <div class="title " style="height: 40px;margin-top: 10px;">
+          <!-- puse height -->
+          <span style="
+                   background: #eeeeee;
+              color: gray;
+              padding-right: 20px;
+              padding-left: 20px;
+              border-radius: 30px;
+              background-size: 20px;
+              width: 90%;
+              margin: auto;
+              display: block;
+              text-align: center;
+            ">¿Cuantos {{transport_type}} necesitas para el servicio?</span>
+
+
+        </div>
+        <div class="row justify-content-center" style="width: 60%;
+        margin: auto;">
+          <ion-item lines="none" style="--background: transparent;">
+            <ion-button (click)="minus()" slot="start" color="primary" fill="clear" style="font-size: 1.37em;
+            margin: 0;">
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </ion-button>
+            <label class="label" for="">{{count}}</label>
+            <ion-button  (click)="add()" slot="end"  color="primary"  fill="clear" style="font-size: 1.37em;
+            margin: 0;">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+          
+        </div>
+        
+        
+
+
+      </div>
+      <!--button next-->
+     
+    </div>
+  </div>
+
+</ion-content>
+<div class="col-md-11 col-lg-10 col-xl-8 m-auto" style="margin: auto;">
+  <ion-button mode="ios" routerLink="/tabs/select-city">
+    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+    <ion-icon name="arrow-left"></ion-icon>
+    Atrás
+  </ion-button>
+  <ion-button mode="ios" (click)="next()" >
+    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+    Siguiente
+  </ion-button>
+</div>

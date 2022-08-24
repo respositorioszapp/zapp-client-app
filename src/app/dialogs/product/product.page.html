@@ -1,0 +1,161 @@
+<ion-content class="gray-background">
+  <ion-button fill="clear" class="dismiss-button" (click)="dismiss('cancel')">
+    <ion-icon slot="icon-only" name="close"></ion-icon>
+  </ion-button>
+  <ng-container *ngIf="product.images && product.images.length >1; else elseTemplate">
+    <ion-slides [options]="slideOpts4">
+      <ion-slide *ngFor="let item of product.images"  class="product-image">
+        <ion-thumbnail >
+          <img [src]="item.src">
+        </ion-thumbnail>
+      </ion-slide>
+
+    </ion-slides>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div [ngStyle]="{'background-image': 'url(' + product.image + ')'}" class="image" >
+      
+    </div>
+    
+  </ng-template>
+
+
+
+  <ion-card mode="ios">
+    <ion-card-content>
+      <p class="ion-text-ippercase">{{product.product}}</p>
+      <p class="ion-text-justify grey-color" [innerHTML]="product.description"></p>
+      <p><strong>{{product.price | currency:'':'symbol':'1.0'}}</strong></p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="product.fields && product.fields.length > 0" mode="ios">
+    <ng-container *ngFor="let key of getArray(fields_others);let i=index">
+      <ion-list-header class=" header" [ngClass]="{'padding': i==0}" (click)="openExpansion(fields_others[key].other_fields, fields_others[key])">
+        <ion-label [ngClass]="{'required-valid': fields_others[key].error}" style="    margin-top: 0;">
+          {{fields_others[key].name | titlecase}}</ion-label>
+        <span class="required" [ngClass]="{'error': fields_radio[key].error}"
+          *ngIf="fields_others[key].required">Requerido</span>
+          <ion-button    fill="clear">
+            <ion-icon [name]="fields_others[key].open ? 'chevron-up-outline' : 'chevron-down-outline'"  
+          ></ion-icon>
+          </ion-button>
+          
+      </ion-list-header>
+      
+      <ng-container *ngIf="fields_others[key].other_fields.length > 0 && fields_others[key].open" >
+        <ion-list inset="true" style="margin: 0 0 0 10px;">
+          <ion-item lines="none" *ngFor="let check of fields_others[key].other_fields">
+            <ng-container *ngIf="check.type=='checkboxes'">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="1">
+                    <ion-checkbox mode="ios" [(ngModel)]="check.selected" (ionChange)="addorRemoveAdditional(check, key)">
+                    </ion-checkbox>
+                  </ion-col>
+                  <ion-col size="8" class="padding-left" [ngClass]="{'not-col-description': !check.description}">
+                    <ion-label class="additional_label d-block " [ngClass]="{'not-description': !check.description}">{{check.label}}  </ion-label>
+                    <ion-label class="additional_label d-block description" *ngIf="check.description">{{check.description}}  </ion-label>
+                  </ion-col>
+                  <ion-col size="3"> 
+                    <span class="ion-text-center price_item" [ngClass]="{'not-description': !check.description}" style="">+{{(check.price
+                      >0 ? check.price: 0) | currency:'':'symbol':'1.0'}}</span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ng-container>
+          </ion-item>
+        </ion-list>
+
+      </ng-container>
+    </ng-container>
+
+    <ion-list *ngIf="radiobuttons.length > 0">
+      <ng-container *ngFor="let key of getArray(fields_radio);let i=index">
+        <ion-list-header class=" header" [ngClass]="{'padding': i==0}" (click)="openExpansion(fields_radio[key].other_fields, fields_radio[key])">
+          <ion-label [ngClass]="{'required-valid': fields_radio[key].error}" style="    margin-top: 0;">
+            {{fields_radio[key].name | titlecase}}</ion-label>
+          <span class="required" [ngClass]="{'error': fields_radio[key].error}"
+            *ngIf="fields_radio[key].required">Requerido</span>
+            <ion-button   fill="clear"><ion-icon  [name]="fields_radio[key].open ? 'chevron-up-outline' : 'chevron-down-outline'" ></ion-icon></ion-button>
+        </ion-list-header>
+        <ion-radio-group [(ngModel)]="fields_radio[key].radio_item" mode="md" *ngIf="fields_radio[key].open && fields_radio[key].other_fields.length > 0">
+          <ion-item *ngFor="let radio of fields_radio[key].other_fields;let i=index" (click)="selectRadio(radio,key)" 
+            [lines]="i==(fields_radio[key].other_fields.length-1)? 'none':'full'" class="no-inner-padding">
+            <ion-grid class="w-100">
+              <ion-row>
+                <ion-col size="1">
+                  <ion-radio  [value]="radio.id" style="margin-right: 5px;"></ion-radio>
+                </ion-col>
+                <ion-col size="8" class="padding-left" [ngClass]="{'not-col-description': !radio.description}">
+                  <ion-label class="additional_label d-block " [ngClass]="{'not-description': !radio.description}">{{radio.label}}  </ion-label>
+                  <ion-label class="additional_label d-block description" *ngIf="radio.description">{{radio.description}}  </ion-label>
+                </ion-col>
+                <ion-col size="3" class="ion-text-right"> 
+                  <span class="price_item" [ngClass]="{'not-description': !radio.description}">+{{radio.price |
+                    currency:'':'symbol':'1.0'}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-radio-group>
+      </ng-container>
+    </ion-list>
+  </ion-card>
+
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-title style="padding: 0;">¿Alguna observación?</ion-title>
+
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-textarea placeholder="" style="    border: 0.5px solid #0000003d;
+      border-radius: 10px;
+      padding: 10px;" [(ngModel)]="product.comments"></ion-textarea>
+      <ion-row>
+        <ion-col size="6">
+          <ion-row class="btn-quantity">
+            <ion-col size="4">
+              <!--sub-->
+              <ion-button color="dark" fill="clear" size="small" (click)="sub()">
+                <ion-icon name="remove"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4">
+              <div class="quantity">
+                {{quantity}}
+              </div>
+            </ion-col>
+            <ion-col size="4">
+              <!--add-->
+              <ion-button color="dark" fill="clear" size="small" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button mode="ios" *ngIf="auth.user.email!='invitado@zapplogistica.com'" (click)="addToCart()">
+            Agregar
+            {{ total | currency:'':'symbol':'1.0'}}
+          </ion-button>
+          <ion-button mode="ios" *ngIf="auth.user.email=='invitado@zapplogistica.com'" (click)="addToCartInvited()">
+            Agregar
+            {{ total | currency:'':'symbol':'1.0'}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+
+
+  <!-- <ion-card>
+    <ion-button fill="clear">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </ion-card> -->
+</ion-footer>

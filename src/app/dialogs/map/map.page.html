@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary" style="position: relative;">
+    <ion-title style="position: absolute; left: 5px;bottom:14px">{{city}}
+    </ion-title>
+    <ion-button (click)="dismiss()" style="position: absolute; right: 5px;bottom:5px">
+      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="position: relative;">
+    <div style="width: 80%;position: fixed;top:80px;left: 0;right: 0;margin: auto;z-index: 200000;">
+      <form [formGroup]="map_data">
+      <!--(ionChange)="search()"-->
+      <ion-input class="inputSearch" *ngIf="!disable" type="text"  placeholder="Escribe una dirección"
+        #searchbar formControlName="address" autocomplete="off" id="searchbar"
+         (keydown)="focus()" (ionBlur)="blur()" (keyup)="search()"   ></ion-input>
+    </form>
+      
+    </div>
+    <div style="position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80%;
+    z-index: 100000;
+    max-height: 300px;
+    overflow: scroll;">
+      <div class="serach_results" *ngIf="results.length>0 && inputFocus">
+        <ion-item>
+          <p style="   max-width: 300px;
+          text-align: center;
+          font-size: small;
+          margin: 10px 0;
+          color: #a7a7a7;">
+            <ion-label style="    text-align: center;
+            white-space: initial;
+            max-width: 100%;">Puede marcar una dirección con el icono (<ion-icon name="star" color="primary"></ion-icon>)</ion-label>
+            <ion-label style="white-space: break-spaces; ">para que pueda guardar en tus direcciones favoritas</ion-label>
+          </p>
+        </ion-item>
+      </div>
+      <ng-container *ngIf="results.length>0 && inputFocus">
+        <div *ngFor="let item of results" class="serach_results" >
+          <ion-item>
+            <ion-icon name="location" color="primary" ></ion-icon>
+            <ion-label style="font-size: 0.8em;" (click)="selectAddress(item)">{{item.description}}</ion-label>
+            <ion-button size="small" fill="clear" *ngIf="!item.favorite" (click)="saveFavoriteAddress(item)"><ion-icon name="star" color="primary"></ion-icon></ion-button>
+            <ion-button size="small" fill="clear" *ngIf="item.favorite" class="favoactive"><ion-icon name="star" ></ion-icon></ion-button>
+            
+          </ion-item>
+  
+        </div>
+      </ng-container>
+      
+      
+    </div>
+  </div>
+ 
+
+  <div #map id="mapMap" style="width: 100%;height: 100%;"></div>
+  
+  <ion-button class="ion-margin-top" *ngIf="!disable"
+    style="font-weight: bold;
+    margin: auto;
+    width: 80%;
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    font-size: 1.2em;" color="primary" expand="block"
+    (click)="selectMyLocation()">
+    <ion-icon name="location-icon"></ion-icon> <ion-label>Usar mi ubicación</ion-label></ion-button>
+  <ion-button class="ion-margin-top" *ngIf="!disable"
+    style="margin: auto;width: 80%;position: absolute;bottom: 10px;left: 0;right: 0;" color="primary" expand="block"
+    (click)="save()">
+    Guardar</ion-button>
+</ion-content>
+<!-- <ion-footer *ngIf="!disable" [translucent]="true" style="height: 100px;">
+  
+  
+ 
+</ion-footer> -->

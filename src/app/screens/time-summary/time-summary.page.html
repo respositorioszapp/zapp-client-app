@@ -1,0 +1,476 @@
+<div class="col-5 " style="margin-top: 3px;">
+  <app-stepper></app-stepper>
+</div>
+<ion-content>
+  <div class="son-container">
+    <div class="row justify-content-center ion-text-center">
+      <div class="col-md-11 col-lg-10 col-xl-8 ">
+        <span style="
+            background: #eeeeee;
+    color: gray;
+    /* padding-right: 90px; */
+    /* padding-left: 90px; */
+    padding: 0 16px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    display: block;
+    width: 100%;
+    text-align: inherit;
+    margin: 8px auto 6px auto;
+
+          ">Resumen del servicio</span>
+      </div>
+      <div style="    
+          width: 80%;
+             ">
+        <div class="row justify-content-center">
+          <div class="col-md-4 col-xs-12 justify-content-center" style="
+                  color: #4992e7;
+                  font-family: Gilroy-ExtraBold;
+                  font-size: 19px;
+                  text-align: center;
+                  width: 33.33333%;
+                ">
+            <img class="summary-icon"  src="assets/imgs/pay-icon.png" />
+            <br />
+            {{ "$ " + transform(quotation ? quotation.total : 0) }}
+          </div>
+          <div class="col-md-4 col-xs-12 justify-content-center" style="
+                  color: #f5a448;
+                  font-family: Gilroy-ExtraBold;
+                  font-size: 19px;
+                  text-align: center;
+                  width: 33.33333%;
+                ">
+            <img class="summary-icon" src="assets/imgs/kmsn-icon.png" />
+
+            <br />
+            {{ quotation.distance }} KM
+          </div>
+          <div class="col-md-4 col-xs-12 justify-content-center" style="
+                  color: #6cc286;
+                  font-family: Gilroy-ExtraBold;
+                  font-size: 19px;
+                  text-align: center;
+                  width: 33.33333%;
+                ">
+            <img class="summary-icon" src="assets/imgs/timen-icon.png" />
+            <br />
+            {{ quotation.duration }} HORAS
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let item of items;let i = index" style="width: 90%;margin: auto;padding: 10px;">
+        <ng-container *ngIf="item.index == 1">
+          <div>
+            <ion-item lines="none" style="border: 3px solid #49158c;
+            border-radius: 40px;
+            text-align: center;
+            font-size: 1.3em;" (click)="openExpansion(item)">
+              <ion-label class="ion-text-center">Resumen</ion-label>
+              <ion-icon [name]="item.open ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+            </ion-item>
+          </div>
+
+
+
+          <ng-container *ngIf="item.open">
+            <div class="col-md-10 col-xs-10" style="
+            background: #f2f2f2;
+    /* border: 0.5px solid red; */
+    border-radius: 20px;
+    /* border-radius: 15px 0px 0px 15px; */
+    /* box-shadow: 5px 5px 5px 5px #888; */
+    width: 100%;
+    margin: auto;
+
+      ">
+             <ion-list style="text-align: left !important;
+             font-size: 22px !important;background: #f2f2f2;border-radius: 20px;">
+               <ion-item lines="none" style="padding: 10px;--background: #f2f2f2;height: 40px;">
+                 <img src="assets/imgs/typeservice-icon.png" style="    width: 30px;
+                 height: 30px;
+                 margin-right: 10px;" />
+                 <div mat-line style="
+                     font-size: 0.9em;
+                     font-family: Gilroy-Light;
+                     text-align: right;
+                     width: 90%;
+                   ">
+                   <span style="
+                       float: left;
+                       color: #49158a;
+                       font-size: 0.9em;
+                       font-family: Gilroy-ExtraBold;
+                     ">Tipo de servicio:</span>
+                   {{ quotation.service_type }}
+                 </div>
+               </ion-item>
+               <ion-item lines="none" style="padding: 10px;--background: #f2f2f2;height: 40px;">
+                 <img *ngIf="quotation.transport_type == 'Motorizado'" src="assets/imgs/motorizado-icon.png" style="    width: 30px;
+                   height: 30px;
+                   margin-right: 10px;" />
+                 <img *ngIf="quotation.transport_type == 'Carry'" src="assets/imgs/carrysm-icon.png" style="    width: 30px;
+                   height: 30px;
+                   margin-right: 10px;" />
+                 <img *ngIf="quotation.transport_type == 'Automóvil'" src="assets/imgs/carro-icon.png" style="    width: 30px;
+                   height: 30px;
+                   margin-right: 10px;" />
+   
+                 <p style="text-align: right; width: 90%;"> <span style="
+                   float: left;
+                   color: #49158a;
+                   font-size: 0.9em;
+                   font-family: Gilroy-ExtraBold;
+                   
+                 ">Tipo de transporte:</span>{{quotation.transport_type}}</p>
+               </ion-item>
+               <ion-item lines="none" style="padding: 10px;--background: #f2f2f2;height: 40px;">
+                 <img src="assets/imgs/city-icon.png" style="    width: 30px;
+                 height: 30px;
+                 margin-right: 10px;" />
+                 <p style="text-align: right;width: 90%;">
+                   <span style="
+                 color: #49158a;
+                 font-size: 0.9em;
+                 font-family: Gilroy-ExtraBold;
+                 float: left;
+               ">Ciudad:</span>
+                   {{ quotation.city }}
+                 </p>
+   
+               </ion-item>
+               <ion-item lines="none" style="padding: 10px;--background: #f2f2f2;height: 40px;">
+                 <img src="assets/imgs/type-icon.png" style="width:40px;height: 40px;" />
+                 <p style="text-align: right;width: 90%;">
+                   <span style="
+                   color: #49158a;
+                   font-size: 0.9em;
+                   font-family: Gilroy-ExtraBold;
+                   float: left;
+                 ">Tipo:</span>
+                   {{quotation.round_trip ? "Ida y Vuelta" : "Solo ida"}}
+                 </p>
+   
+               </ion-item>
+               <ion-item lines="none" style="padding: 10px;--background: #f2f2f2;height: 40px;">
+                 <img src="assets/imgs/date-con.png" style="    width: 30px;
+                 height: 30px;
+                 margin-right: 10px;" />
+                 <p style="text-align: right;width: 90%;">
+                   <span style="
+                 color: #49158a;
+                 font-size: 0.9em;
+                 font-family: Gilroy-ExtraBold;
+                 float: left;
+               ">Fecha:</span>
+                   {{ quotation.date }}
+                 </p>
+   
+               </ion-item>
+               <ion-item lines="none" style="padding: 10px;--background: #f2f2f2;height: 40px;"
+                 *ngIf="quotation.diligence">
+                 <img src="assets/imgs/type-icon.png" style="    width: 30px;
+                 height: 30px;
+                 margin-right: 10px;" />
+                 <p style="text-align: right;width: 90%;">
+                   <span style="
+                   color: #49158a;
+                   font-size: 0.9em;
+                   font-family: Gilroy-ExtraBold;
+                 ">Diligencia</span>
+                 </p>
+               
+               </ion-item>
+             </ion-list>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="item.index == 2">
+          <div>
+            <ion-item lines="none" style="border: 3px solid #49158c;
+          border-radius: 40px;
+          text-align: center;
+          font-size: 1.3em;" (click)="openExpansion(item)">
+              <ion-label class="ion-text-center">{{quotation.transport_type}}({{quotation.driver_count}})</ion-label>
+              <ion-icon [name]="item.open ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+            </ion-item>
+          </div>
+
+
+
+          <ng-container *ngIf="item.open">
+            <div class="col-md-5 col-xs-5" style="background: #f2f2f2;
+              background: #f2f2f2;
+    /* border: 0.5px solid red; */
+    border-radius: 20px;
+    /* border-radius: 15px 0px 0px 15px; */
+    /* box-shadow: 5px 5px 5px 5px #888; */
+    width: 100%;
+    margin: auto;
+    max-height: 200px;
+    overflow-y: scroll;">
+              <div>
+                <div *ngFor="let driver of quotation.driver_count_array" style="margin-bottom: 18px;
+                  margin-top: 15px;font-family: Gilroy-ExtraBold;color: #49158a;text-align: center;">
+                  {{driver.driver}}
+
+                  <div style="text-align: left !important; margin-left:24px">
+                    Direcciones:
+                  </div>
+                  <ion-list style="text-align: left !important;background: #f2f2f2">
+                    <ion-item style="
+                      margin-bottom: 24px;--background: #f2f2f2;" lines="none"
+                      *ngFor="let item of  driver.address_array; let i = index">
+                      <div class="address-btn text-center">
+                        <img [src]="
+                                  'assets/imgs/markers/' + az_arr[i] + '.png'
+                                " style="width: 40px;height: 40px;"/>
+                      </div>
+                      <div mat-line>
+                        <fieldset style="
+                            border-radius: 12px;
+                            border-color: #dfdfdf;
+                            width: 90%;
+                            font-size: 0.75em;
+                          ">
+                          {{ (item.address)  }}
+                        </fieldset>
+                      </div>
+                    </ion-item>
+                  </ion-list>
+                  <ion-row>
+                    <ion-col size="6">
+                      <div>Hora de Inicio: <span style="font-family:Gilroy-Light ;font-size: 16px; font-weight: bold;">{{driver.start_time}}</span></div>
+                    </ion-col>
+                    <ion-col size="6">
+                      <div>Hora de fin: <span style="font-family:Gilroy-Light ;font-size: 16px;font-weight: bold;">{{driver.departure_time}} </span>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                  
+                  
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="item.index == 3">
+          <div>
+            <ion-item lines="none" style="border: 3px solid #49158c;
+            border-radius: 40px;
+            text-align: center;
+            font-size: 1.3em;" (click)="openExpansion(item)">
+              <ion-label class="ion-text-center">Valor servicio</ion-label>
+              <ion-icon [name]="item.open ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+            </ion-item>
+          </div>
+
+
+          <ng-container *ngIf="item.open">
+            <div class="col-md-10 col-xs-10" style="background: #f2f2f2;
+              /* height: 29%; */
+             width: 100%;
+             border-radius: 20px;">
+              <ion-list style="text-align: left !important;background: #f2f2f2; border-radius: 20px;">
+                <ion-item lines="none" style="    --background: #f2f2f2;
+                height: 30px;
+                padding: 5px !important;
+                /* min-height: 50px; */
+                font-size: 0.9em;">
+                  <div mat-line style="
+                             text-align: right;
+        font-size: 1.1em;
+        font-family: Gilroy-Light;
+        height: 40px;
+        width: 100%;
+                    ">
+                    <span style="
+                        float: left;
+                        color: #49158a;
+                        font-size: 0.9em;
+                        font-family: Gilroy-Light;
+                      ">Tarifa base:</span>
+                    <ion-label slot="end">{{ "$ " + transform(price_per_transport_type[quotation.transport_type]) }}</ion-label>
+    
+                  </div>
+                </ion-item>
+                <ion-item lines="none" style="    --background: #f2f2f2;
+                height: 30px;
+                padding: 5px !important;
+                /* min-height: 50px; */
+                font-size: 0.9em;">
+                  <div mat-line style="
+                            text-align: right;
+        font-size: 1.1em;
+        font-family: Gilroy-Light;
+        height: 40px;
+        width: 100%;
+                    ">
+                    <span style="
+                        float: left;
+                        color: #49158a;
+                        font-size: 0.9em;
+                        font-family: Gilroy-Light;
+                      ">Recargo por distancia:</span>
+    
+                    {{ "$ " + transform(kmadd_base_total) }}
+                  </div>
+                </ion-item>
+                <ion-item lines="none" style="    --background: #f2f2f2;
+                height: 30px;
+                padding: 5px !important;
+                /* min-height: 50px; */
+                font-size: 0.9em;">
+                  <div mat-line style="
+                             text-align: right;
+        font-size: 1.1em;
+        font-family: Gilroy-Light;
+        height: 40px;
+        width: 100%;
+                    ">
+                    <span style="
+                        float: left;
+                        color: #49158a;
+                        font-size: 0.9em;
+                        font-family: Gilroy-Light;
+                      ">Valor declarado:</span>
+    
+                    $ 0
+                  </div>
+                </ion-item>
+                <ion-item lines="none" style="    --background: #f2f2f2;
+                height: 30px;
+                padding: 5px !important;
+                /* min-height: 50px; */
+                font-size: 0.9em;">
+                  <div mat-line style="
+                             text-align: right;
+        font-size: 1.1em;
+        font-family: Gilroy-Light;
+        height: 40px;
+        width: 100%;
+                    ">
+                    <span style="
+                        float: left;
+                        color: #49158a;
+                        font-size: 0.9em;
+                        font-family: Gilroy-Light;
+                      ">Periferias:</span>
+    
+                    $ 0
+                  </div>
+                </ion-item>
+                <ion-item lines="none" style="    --background: #f2f2f2;
+                height: 30px;
+                padding: 5px !important;
+                /* min-height: 50px; */
+                font-size: 0.9em;">
+                  <div mat-line style="
+                             text-align: right;
+        font-size: 1.1em;
+        font-family: Gilroy-Light;
+        height: 40px;
+        width: 100%;
+                    ">
+                    <span style="
+                        float: left;
+                        color: #49158a;
+                        font-size: 0.9em;
+                        font-family: Gilroy-Light;
+                      ">Tiempo en espera:</span>
+    
+                    $ 0
+                  </div>
+                </ion-item>
+                <ion-item lines="none" style="    --background: #f2f2f2;
+                height: 30px;
+                padding: 5px !important;
+                /* min-height: 50px; */
+                font-size: 0.9em;">
+                  <div mat-line style="
+                             text-align: right;
+        font-size: 1.1em;
+        font-family: Gilroy-Light;
+        height: 40px;
+        width: 100%;
+                    ">
+                    <span style="
+                        float: left;
+                        color: #49158a;
+                        font-size: 0.9em;
+                        font-family: Gilroy-Light;
+                      ">Otros:</span>
+    
+                    $ 0
+                  </div>
+                </ion-item>
+                <ion-item lines="none" style="    --background: #f2f2f2;
+                height: 30px;
+                padding: 5px !important;
+                /* min-height: 50px; */
+                font-size: 0.9em;" *ngIf="quotation.diligence">
+                  <div mat-line style="
+                             text-align: right;
+        font-size: 1.1em;
+        font-family: Gilroy-Light;
+        height: 40px;
+        width: 100%;
+                    ">
+                    <span style="
+                        float: left;
+                        color: #49158a;
+                        font-size: 0.9em;
+                        font-family: Gilroy-Light;
+                      ">Diligencia:</span>
+    
+                    $ 12.000
+                  </div>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
+
+<div mat-line style="
+text-align: right;
+background-color: #48158e;
+color: white;
+font-size: 15px;
+border-radius: 14px;
+padding: 7px;
+width: 90%;
+margin: auto;
+font-family: Gilroy-Light;
+">
+  <span style="
+  float: left;
+  font-size: 15px;
+  font-family: Gilroy-Light;
+">
+    <strong>Total:</strong>
+  </span>
+  <strong> {{ "$ " + transform(quotation.total) }}</strong>
+</div>
+
+<div class="col-md-11 col-lg-10 col-xl-8 m-auto" style="margin: auto;">
+  <ion-button mode="ios" fill="outline" routerLink="/tabs/select-time">
+    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+    <ion-icon name="arrow-left"></ion-icon>
+    Atrás
+  </ion-button>
+  <ion-button mode="ios" (click)="payment()">
+    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+    Pagar
+  </ion-button>
+</div>

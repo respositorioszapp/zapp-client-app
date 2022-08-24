@@ -1,0 +1,115 @@
+
+
+<ion-content>
+  <h1 class="ion-text-center">{{this.category_selected.name}}</h1>
+  <ion-row style="margin-bottom: 20px;">
+    <!-- <h5 class="title" style="    margin-left: 5px;">Categorías</h5> -->
+    <ion-col size="12" style="margin: auto;">
+      <ion-slides [options]="slideOpts3">
+        
+        <ng-container *ngIf="categories_loading">
+          <ion-slide>
+            <div class="card">
+              <div>
+                <ion-thumbnail slot="start" class="ion-text-center" style="margin: auto;
+                height: 37px;">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+              </div>
+              <p style="font-size: 0.6em;
+            margin: 0;">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </p>
+
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="card">
+              <div>
+                <ion-thumbnail slot="start" class="ion-text-center" style="margin: auto;
+                height: 37px;">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+              </div>
+              <p style="font-size: 0.6em;
+            margin: 0;">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </p>
+
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="card">
+              <div>
+                <ion-thumbnail slot="start" class="ion-text-center" style="margin: auto;
+                height: 37px;">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+              </div>
+              <p style="font-size: 0.6em;
+            margin: 0;">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </p>
+
+            </div>
+          </ion-slide>
+
+
+        </ng-container>
+        <ng-container *ngFor="let item of categories;let i = index">
+          <ion-slide   class="slide-categories" (click)="selectCategory(item)" >
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-thumbnail >
+                    <ion-img [src]="item.image ? item.image.src:''" ></ion-img>
+                  </ion-thumbnail>
+                  
+                </ion-col>
+              </ion-row>
+              <ion-row class="reversed-top">
+                <ion-col size="12">
+                  <ion-label style="font-size: 1em;">{{item.name}}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-slide>
+          
+        </ng-container>
+        
+        
+      </ion-slides>
+    </ion-col>
+  </ion-row>
+  <ion-card mode="ios" style="" *ngFor="let item of array3" (click)="showProducts(item)">
+    <ion-badge color="primary" style="position: absolute;right: 0;">3.5</ion-badge>
+    <ion-card-content style="display: flex;padding: 0;">
+      <img [src]="item.image" alt="" style="display: block;width: 100px;height: 100px;">
+      <div style="width: 80%;padding: 10px;">
+        <h3>{{item.business}}</h3>
+        <h5>{{item.product}}</h5>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-card-subtitle>{{item.time}}</ion-card-subtitle>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card-subtitle>{{item.calification}} <ion-icon style="color: #ecec3e;
+            " name="star"></ion-icon>
+            </ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+  <ng-container *ngIf="array3.length==0">
+    <h3 class="ion-text-center empty">No hay tiendas con esta categoría</h3>
+
+    <img src="assets/imgs/zapp-not-found.gif" alt="">
+  </ng-container>
+
+</ion-content>

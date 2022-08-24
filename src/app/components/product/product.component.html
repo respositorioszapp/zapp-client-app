@@ -1,0 +1,51 @@
+<ion-button fill="clear" class="wish" (click)="wishList()">
+  <ion-icon name="heart-circle-outline" style="position: absolute;right: 0;font-size: x-large;" class="not-in-wishlist"
+    [ngClass]="{'wishlist': product.wishlist}"></ion-icon>
+</ion-button>
+<ion-card mode="ios" class="product">
+
+
+
+  <ion-card-content class="product-detail" >
+    <img [src]="product.image" alt="" class="image" [ngClass]="{'blur': product.available == 0}" (click)="showProduct()">
+
+    <!-- <div [ngStyle]="{'background-image': 'url(' + product.image + ')'}" class="image" [ngClass]="{'blur': product.available == 0}" (click)="showProduct()">
+      
+    </div> -->
+    
+    <div class="info">
+      
+      <h3>{{product.business}}</h3>
+      <h5>{{product.product}}</h5>
+
+      <ion-row>
+        
+       <ion-col size="6" >
+           <ion-card-subtitle  *ngIf="isOffer;" class="offer">{{product.regular_price | currency:'':'symbol':'1.0'}}
+           </ion-card-subtitle>
+          <ion-card-subtitle 
+              >{{product.price | currency:'':'symbol':'1.0'}}
+            </ion-card-subtitle>
+          <ion-card-subtitle >
+            <ng-container *ngIf="product.categories; else elseTemplate">
+              {{product.calification}} <ion-icon style="color: #ecec3e;
+              " name="star"></ion-icon>
+            </ng-container>
+            <ng-template #elseTemplate>
+
+              <ng-container *ngIf="!isOffer; ">
+                {{product.calification}} <ion-icon style="color: #ecec3e;
+              " name="star"></ion-icon>
+              </ng-container>
+            </ng-template>
+          </ion-card-subtitle>
+          <p *ngIf="product.available == 0"  class="spent">Agotado</p>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-button   (click)="showProduct()">Ver</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </ion-card-content>
+</ion-card>

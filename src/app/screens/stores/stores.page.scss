@@ -1,0 +1,66 @@
+.slide-categories {
+    min-height: 93px;
+    min-width: 100px;
+    max-width: 30%;
+    border-radius: 10px;
+
+    & ion-grid {
+        padding: 0;
+
+        & ion-row {
+            padding: 0;
+
+            &.reversed-top {
+                margin-top: -10px;
+
+                & ion-label {
+                    font-size: 0.65em !important;
+                }
+            }
+
+            & ion-col {
+
+                & ion-thumbnail {
+                    border-radius: 20px;
+                    width: 100%;
+                    min-width: 91px;
+                    --border-radius: 20px;
+                    height: 100px;
+                    max-height: 100px;
+
+                    & ion-img {
+                        width: 100%;
+                        border-radius: 10px;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+
+                        & img {
+                            width: auto !important;
+                            max-width: 100%;
+                        }
+                    }
+                }
+
+                & img {
+                    height: 50px;
+                    max-height: 50px;
+                    min-height: 50px;
+                    width: 100%;
+                    min-width: 90px;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+}
+
+h3 {
+    &.empty {
+        position: absolute;
+        right: 0;
+        left: 0;
+        color: #77a7ff;
+    }
+
+}

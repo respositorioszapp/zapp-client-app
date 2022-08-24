@@ -1,0 +1,53 @@
+<app-stepper></app-stepper>
+<ion-content>
+  <div class="row justify-content-center" style="margin-top: 10px;">
+    <!--stepper-->
+    
+    <!--form-->
+    <div class="col-md-11 col-lg-10 col-xl-8 pb-4">
+      <div class="title">
+        <span style="
+            background: #eeeeee;
+            color: gray;
+            padding-right: 60px;
+            padding-left: 60px;
+            border-radius: 30px;
+            background-size: 20px;
+          ">Seleccione la ciudad</span>
+      </div>
+
+      <ion-select placeholder="Selecciona una ciudad" [interfaceOptions]="customAlertOptions" interface="alert" class="col-md-6 col-xs-12" style="border: 2px solid rgba(196, 255, 18, 1);
+      width: 330px;
+      text-align: left;
+      padding: 10px;
+      border-radius: 20px;
+    "  [(ngModel)]="quotation.city_id" (ngModelChange)="changeCity()" [selectedText]="city.name">
+        <ion-select-option *ngFor="let c of cities_array" value="{{ c.id }}">{{c.name}}</ion-select-option>
+      </ion-select>
+
+      <ion-select placeholder="Selecciona una sede" [interfaceOptions]="customAlertOptions" (ngModelChange)="changeBranch()" interface="alert" class="col-md-6 col-xs-12" style="border: 2px solid rgba(196, 255, 18, 1) ;
+      width: 330px;
+      text-align: left;
+      padding: 10px;
+      border-radius: 20px;
+    "  [(ngModel)]="quotation.branch_office_id" *ngIf="auth.role.id == 4" [selectedText]="branch_office.name">
+        <ion-select-option *ngFor="let c of branches" value="{{ c.id }}">{{c.name}}</ion-select-option>
+      </ion-select>
+
+
+    </div>
+    <!--button next-->
+    <div class="col-md-11 col-lg-10 col-xl-8">
+      <ion-button mode="ios" routerLink="/tabs/service-type">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        <ion-icon name="arrow-left"></ion-icon>
+        Atrás
+      </ion-button>
+      <ion-button mode="ios" (click)="next()">
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+        Siguiente
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

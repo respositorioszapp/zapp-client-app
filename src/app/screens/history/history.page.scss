@@ -1,0 +1,84 @@
+.button-orange {
+    --background: orange;
+    color: white;
+    
+}
+
+.text-orange{
+    color: orange;
+}
+
+.button-yellow {
+    --background: #c6c73a;
+    color: white;
+}
+
+.text-yellow{
+    color: #c6c73a;
+}
+
+.button-light {
+    --background: #ffffff;
+    color: #49158c;
+}
+
+ion-button {
+    &.state {
+        &.completed{
+            height: 100%;
+            font-size: 1.5em;
+        }
+        --padding-start: 0;
+        --padding-end: 0;
+        width: 50px;
+        min-width: 50px;
+        min-height: 50px;
+
+        & ion-icon {
+            font-size: 1.5em;
+        }
+        
+
+        & img,lottie-player {
+            height: 50px;
+            width: 50px;
+            // border: 2px solid #0eda0e;
+            border-radius: 100%;
+            // padding: 5px;
+        }
+    }
+
+    &.border-top-gray{
+        border-top: 1px solid #ccc;
+    }
+}
+
+
+
+.button-green {
+    --background: green;
+    color: white;
+}
+
+.text-green{
+    color: green;
+}
+
+.button-red {
+    --background: red;
+    color: white;
+}
+
+.text-red{
+    color: red;
+}
+
+.button-gray {
+    --background: #CE4257;
+    color: #CE4257;
+}
+
+.button-cancel {
+    --background: #95B2B0;
+    color: #95B2B0;
+}

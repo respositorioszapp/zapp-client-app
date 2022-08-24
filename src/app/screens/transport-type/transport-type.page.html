@@ -1,0 +1,78 @@
+<div>
+  <app-stepper></app-stepper>
+</div>
+<ion-content>
+  <div class="son-container" style="text-align: center;
+
+  margin-top: 12px;">
+    <div class="row justify-content-center">
+      <!--stepper-->
+      
+      <!--form-->
+      <div class="col-md-11 col-lg-10 col-xl-8">
+        <div class="title">
+          <span
+            style="
+              background: #eeeeee;
+              color: gray;
+              padding-right: 20px;
+              padding-left: 20px;
+              border-radius: 30px;
+              background-size: 20px;
+              width: 90%;
+              margin: auto;
+              display: block;
+            "
+            >¿Qué tipo de transporte deseas?</span
+          >
+        </div>
+        <br />
+
+        <!-- <label  *ngFor="let item of transport_array" class="radio-button lg text-center text-muted">
+                    <input type="radio" [(ngModel)]="quotation.transport_type_id" value="{{item.id}}" class="hidden">
+                    <div [class]="quotation.transport_type_id == item.id? 'radio-button-box radio-button-box-active' : 'radio-button-box'">
+                        <img src="../../../../assets/imgs/{{item.img}}"  width="30%">
+                        <div class="radio-button-box-type pt-1"><b>{{item.name}}</b></div>
+                    </div>
+                </label >  -->
+        <ion-row>
+          <ion-col size="6" [ngClass]="{'m-auto': i == (transport_array.length-1)}" *ngFor="let item of transport_array; let i =index" (click)="next(item.id)">
+            <label class="radio-button lg ion-text-center text-muted" style="width: 100%;">
+              <input
+                type="radio"
+                [(ngModel)]="quotation.transport_type_id"
+                value="{{ item.id }}"
+                class="hidden"
+              />
+              <div
+                [class]="
+                  quotation.transport_type_id == item.id
+                    ? 'radio-button-box radio-button-box-active'
+                    : 'radio-button-box'
+                "
+                style="width: 100%;"> 
+                <img
+                  class="imagen"
+                  src="assets/imgs/{{ item.img }}"
+                />
+                <div class="radio-button-box-type pt-1" style="width: 100%;">
+                  <b>{{ item.name }}</b>
+                </div>
+              </div>
+            </label>
+          </ion-col>
+        </ion-row>
+        <!-- <div class="row justify-content-center">
+          <div class="col-md-4" *ngFor="let item of transport_array" (click)="next(item.id)">
+            
+          </div>
+        </div> -->
+      </div>
+      <br />
+      <br />
+      <br />
+      <!--button next-->
+      
+    </div>
+  </div>
+</ion-content>

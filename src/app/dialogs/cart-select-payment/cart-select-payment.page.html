@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary" style="position: relative;" mode="ios">
+    <ion-item lines="none" color="primary">
+      <ion-title>Método de pago
+      </ion-title>
+      <ion-button (click)="dismiss({}, true)" slot="end" style="width: 40px;">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="row justify-content-center ion-text-center" style="margin-top: 20%;">
+    <div class="col-md-11 col-lg-10 col-xl-8">
+      <span class="cart-title">Seleccionar método de pago</span>
+    </div>
+    <div style="width: 80%;">
+      <ion-list>
+        <ion-item lines="none" style="border: 1.5px solid #49158c73;
+        border-radius: 20px; margin-bottom: 5px;" (click)="selectPaymentMethod('efectivo')">
+          <ion-icon name="cash-sharp" color="primary"></ion-icon>
+          <ion-label style="margin-left: 5px;">EFECTIVO</ion-label>
+          <ion-icon slot="end" color="primary" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" style="border: 1.5px solid #49158c73;
+        border-radius: 20px;margin-bottom: 5px;" (click)="selectPaymentMethod('Wompi')">
+          <img src="assets/imgs/wompi.png" class="img-icon border-radius-circular" alt="">
+          
+          <ion-label style="margin-left: 5px;">Pago por Tarjeta Crédito/Débito </ion-label>
+          <ion-icon slot="end" color="primary" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+      </ion-list>
+      <ng-container *ngIf="payment_method == 'Transferencia bancaria'">
+        <div>
+          <ion-card mode="ios">
+            <ion-card-content>
+              <img src="assets/imgs/bank-icon.png" alt="" style="width: 70px;height: 70px;">
+              <p>
+
+                <span><strong> Zapp Logística <br> Cuenta de Ahorros 377-000-004-45</strong></span>
+              </p>
+
+
+              <img src="assets/imgs/davi-icon.png" style="width:70px;height:70px" /><br />
+              <strong> Cuenta No. 3213948906 </strong>
+              <br /><img src="assets/imgs/nequi-icon.png" style="width:70px;height:70px" /><br />
+              <strong> Nequi </strong>
+              <br>
+              <ion-button class="ion-text-center" size="small" (click)="selectTranfer()">Elegir</ion-button>
+            </ion-card-content>
+          </ion-card>
+
+        </div>
+      </ng-container>
+    </div>
+
+
+
+  </div>
+
+</ion-content>

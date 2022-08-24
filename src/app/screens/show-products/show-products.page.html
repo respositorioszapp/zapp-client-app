@@ -1,0 +1,152 @@
+<ion-content>
+  <div style="" class="shop" *ngIf="shop_selected">
+    <div style="position: relative;    height: 100%;">
+      <div class="banner" [ngStyle]="{'background-image': 'url(' + shop_selected.profile_settings.img_banner + ')'}"
+        *ngIf="shop_selected">
+      </div>
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <div *ngIf="shop_selected" class="avatar">
+            <img [src]="shop_selected.profile_settings.img_gravatar" alt="" style="width: 100%;height: 100%;">
+
+          </div>
+          <div style="margin-left: 110px;">
+            <h6 class="address" style="margin-left: 5px;">
+              {{shop_selected.profile_settings.find_address}}
+            </h6>
+            <h5 *ngIf="shop_selected" class=" shop_name">{{shop_selected?.profile_settings.store_name | uppercase}}</h5>
+            <span class="shop_status"
+              [ngClass]="{'open': status_shop.status == 'open', 'close': status_shop.status != 'open'}">
+              <ion-label for="">{{shop_status}}</ion-label>
+            </span>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+
+  </div>
+
+
+  <ion-segment [(ngModel)]="segment" style="margin-top: 10px;">
+    <ion-segment-button value="products" style="    font-size: 1.3em;
+    font-weight: bold;
+    color: #49158c;
+">
+      <ion-label>Productos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ng-container *ngIf="array3.length >0">
+    <div *ngFor="let item of array3" style="position: relative;">
+      <product [product]="item"></product>
+
+    </div>
+
+  </ng-container>
+
+
+  <ion-list *ngIf="loading">
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData(false,$event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

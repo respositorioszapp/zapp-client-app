@@ -1,0 +1,146 @@
+<h5 class="ion-text-center">Listado de ordenes</h5>
+<ion-content>
+  <ng-container *ngIf="orders.length> 0;else elseT">
+    <ion-list mode="ios" color="warning">
+      <ion-card *ngFor="let item of orders" style="margin-bottom: 10px;">
+
+        <ion-card-content style="padding-top: 0px;padding-bottom: 0px;">
+          <ion-button style="--border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          font-size: 0.5em;
+          text-align: center;" color="danger" size="small" *ngIf="item.status_order == 22"   (click)="cancel(item)">
+            <ion-icon name="close"></ion-icon> 
+          </ion-button>
+
+          <div style="width:100%;display: flex;">
+            <div class="w-50">
+              ORDEN #{{item.id}}
+            </div>
+            <div style="width: 50%;text-align:right">
+              {{ item.date}}
+            </div>
+          </div>
+          <div class="row">
+            <div >
+              <p class=" " style="font-size: 0.8em;">Tipo de Servicio : <strong>{{item.service_type}}</strong>
+              </p>
+            </div>
+   
+          </div>
+
+          <div class="row" *ngFor="let ad of filterFirstTwo(item.detail)">
+            <div class="w-50">
+              <strong style="font-size: 0.7em;">{{ad.address}}</strong>
+            </div>
+          </div>
+          <div class="row" *ngIf="item.service_type_id == 3">
+            <div class="w-50">
+              <p class=""> Número de horas : </p>
+            </div>
+            <div style="width: 50%;    ">
+              <strong>{{item.number_hours}}</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div >
+              <p class=" " style="font-size: 0.8em;">Total : <strong>{{item.total }}</strong>
+              </p>
+            </div>
+   
+          </div>
+          <ng-container *ngIf="item.view_more">
+            <div class="row">
+              <div >
+                <p class=" " style="font-size: 0.8em;"> Ciudad : <strong>{{item.city}}</strong></p>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div >
+                <p class=""  style="font-size: 0.8em;"> Recorrido :<strong>{{item.round_trip ==1 ? 'Ida y Vuelta': 'Ida'}}</strong> </p>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div class="">
+                <p class="" style="font-size: 0.8em;"> Valor declarado : <strong>{{item.declared_value}}</strong> </p>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div >
+                <p class="" style="font-size: 0.8em;"> Tipo de accesorio : <strong>{{item.accessory_type}}</strong></p>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div >
+                <p style="font-size: 0.8em;"> Método de pago : <strong>{{item.payment_method}}</strong> </p>
+              </div>
+              
+            </div>
+          </ng-container>
+
+         
+          <ion-row  style="transition: all ease 2s;" class="ion-text-center">
+            <ion-col size="4"  (click)="view_order(item)">
+              <ion-button style="height: 40px;
+              width: 40px;
+              font-size: 10px;
+              font-weight: bold;">
+                <ion-icon name="eye-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4"  (click)="view_driver(item)" *ngIf="item.drivers.length > 0">
+              <ion-button expand="block" color="success" style="height: 40px;
+              width: 40px;
+              font-size: 10px;
+              font-weight: bold;margin:auto">
+                <ion-icon name="person-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4"  [offset]="item.drivers.length > 0 ?  0 :4" >
+              <p style="margin-top:20px"><strong [class]="item.color">{{item.state_order}}</strong></p>
+              
+            </ion-col>
+           
+            <h6 class="ion-text-center" [ngClass]="{'hidden': !item.view_more}" *ngIf="item.status_order == 22">Estamos buscando al mensajero más cercano</h6>
+          </ion-row>
+
+
+
+
+
+
+        </ion-card-content>
+        
+        
+        <div class="row ion-text-center justify-content-center" (click)="viewMore(item)">
+          <ion-button fill="clear"  style="
+          height: 20px;
+      ">
+            <ion-icon [name]="item.view_more ? 'chevron-up-outline': 'chevron-down-outline'"></ion-icon>
+          </ion-button>
+        </div>
+
+
+
+      </ion-card>
+
+    </ion-list>
+  </ng-container>
+  <ng-template #elseT>
+    <ion-item lines="none">
+      <h4 class="ion-text-center" style="width: 100%;">No tiene ordenes pendientes</h4>
+    </ion-item>
+  </ng-template>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToTransportType()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

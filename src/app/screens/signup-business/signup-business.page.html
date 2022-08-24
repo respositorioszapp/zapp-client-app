@@ -1,0 +1,180 @@
+<ion-content class=" warning-gradient-sign-up">
+  <!-- <ion-card mode="ios">
+    
+  
+    <ion-card-content>
+      
+    </ion-card-content>
+  </ion-card> -->
+  <ion-button fill="clear" (click)="goToLogin()"  >
+    <ion-icon name="arrow-back-outline" style="color: #49158c;
+    font-size: 1.3em;"></ion-icon>
+  </ion-button> 
+  
+  <div class="ion-text-center margin-top-15vh ion-padding-bottom" style="width: 60%;
+  margin: auto;">
+    <img src="assets/imgs/logo zapp.png" style="    width: 170px;
+    height: 70px;">
+  </div> 
+  
+  <div style="width: 80%;margin: auto;margin-top: 10%;">
+    <h4>Crear cuenta</h4>
+    <ion-card-header style="display: block;" class="ion-text-center">
+      <ion-button fill="clear" [ngClass]="{'strong': route == '/select-type/client'}" (click)="goToClient()">
+        <ion-icon [name]="route == '/select-type/client' ? 'person': 'person-outline'"></ion-icon>
+        <br>
+        <ion-label>Cliente</ion-label>
+      </ion-button>
+      <ion-button fill="clear" [ngClass]="{'strong': route == '/select-type/business'}">
+        <ion-icon [name]="route == '/select-type/business' ? 'business': 'business-outline'"></ion-icon>
+        <br>
+        <ion-label>Empresa</ion-label>
+      </ion-button>
+
+      <!-- <ion-card-title class="ion-text-center">Registro Cliente</ion-card-title> -->
+    </ion-card-header>
+    <form [formGroup]="businessInformation" #formDirective="ngForm" novalidate>
+    <!-- <ion-item lines="none" class="input-text ion-margin-top">
+
+        <ion-select placeholder="Seleccione una tipo" formControlName="dni_type_id" style="display: contents;"
+          [selectedText]="type.name" mode="ios">
+          <ion-select-option *ngFor="let item of types; let i = index " [value]="item.id">{{item.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.dni_type_id.dirty && controls.dni_type_id.touched && controls.dni_type_id.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.dni_type_id.errors.required">El tipo de documento es requerido</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="No. Identificación" formControlName="dni" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf=" controls.dni.dirty && controls.dni.touched && controls.dni.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.dni.errors.required">El número de identificación es requerido</ion-label>
+      </ion-item>-->
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Nombre" formControlName="names" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf=" controls.names.dirty && controls.names.touched && controls.names.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.names.errors.required">Nombre es requerido</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Apellidos" formControlName="lastnames" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf=" controls.lastnames.dirty && controls.lastnames.touched && controls.lastnames.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.lastnames.errors.required">Apellidos es requerido</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Dirección" formControlName="address" required></ion-input>
+      </ion-item>
+      <ion-item class="danger-color-text"
+        *ngIf="controls.address.dirty && controls.address.touched && controls.address.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.address.errors.required">Dirección es requerida</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+
+        <ion-select placeholder="Seleccione una ciudad" name="city" formControlName="city" style="display: contents;"
+          [selectedText]="city.name" mode="ios">
+          <ion-select-option *ngFor="let item of cities; let i = index " [value]="item.id">{{item.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.city.dirty && controls.city.touched && controls.city.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.city.errors.required">La ciudad es requerida</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Teléfono" formControlName="phone" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.phone.dirty && controls.phone.touched && controls.phone.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.phone.errors.required">El teléfono es requerido</ion-label>
+        <ion-label *ngIf="controls.phone.errors.minlength || controls.phone.errors.maxlength">
+          Debe ser 10 dígitos
+        </ion-label>
+        <ion-label *ngIf="controls.phone.errors.pattern">El télefono es un valor numérico</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Nombre Empresa" formControlName="business_name" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.business_name.dirty && controls.business_name.touched && controls.business_name.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.business_name.errors.required">El nombre de la empresa es requerido</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Nit" formControlName="nit" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.nit.dirty && controls.nit.touched && controls.nit.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.nit.errors.required">El nit de la empresa es requerido</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Cargo" formControlName="position" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.position.dirty && controls.position.touched && controls.position.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.position.errors.required">El cargo de la empresa es requerido</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Email" formControlName="email" type="email" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf=" controls.email.dirty && controls.email.touched && controls.email.errors">
+        <ion-icon class="danger-color-text" name="alert-circle" slot="start"></ion-icon>
+        <ion-label *ngIf="controls.email.errors.required">Email es requerido</ion-label>
+        <ion-label *ngIf="controls.email.errors.email || controls.email.errors.pattern">Debe ser un email válido
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Contraseña" formControlName="password" [type]="view ? 'text':'password'" required></ion-input>
+        <ion-icon [name]="view ? 'eye-outline': 'eye-off-outline'" slot="end" (click)="setView()"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.password.dirty && controls.password.touched && controls.password.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.password.errors.required">La contraseña es requerida</ion-label>
+        <ion-label *ngIf="controls.password.errors.minlength || controls.password.errors.maxlength">La contraseña debe
+          ser
+          de 8 a 16 caracteres</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top">
+        <ion-input placeholder="Repetir Contraseña" formControlName="password_confirm" [type]="view_confirm ? 'text':'password'" required>
+        </ion-input>
+        <ion-icon [name]="view_confirm ? 'eye-outline': 'eye-off-outline'" slot="end" (click)="setViewConfirm()"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.password_confirm.dirty && controls.password_confirm.touched && controls.password_confirm.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.password_confirm.errors.required">La contraseña es requerida</ion-label>
+        <ion-label *ngIf="controls.password_confirm.errors.mustMatch">Las contraseñas no coinciden</ion-label>
+      </ion-item>
+      <a href="https://www.zapplogistica.com/privacy/" class="ion-margin-top ion-text-center" target="_blank" rel="noopener noreferrer"
+        style="font-size: 1.2em;display:block;color: #1c024b;" color="primary">Ver términos y condiciones</a>
+      <ion-item lines="none">
+
+        <ion-label class="ion-text-justify">Aceptar los términos y condiciones</ion-label>
+        <ion-checkbox slot="start" formControlName="terms" style=" margin-right: 10px;"></ion-checkbox>
+      </ion-item>
+      <ion-button type="submit" expand="block" mode="ios" color="primary" class="ion-margin-top"
+        (click)="save(formDirective)">
+        REGISTRARSE
+      </ion-button>
+    </form>
+  </div>
+
+</ion-content>

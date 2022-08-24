@@ -1,0 +1,21 @@
+{
+	"appId": "com.zapp.client.app",
+	"appName": "zapp-client-app",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 5000
+		},
+		"GoogleAuth": {
+			"scopes": [
+				"profile",
+				"email"
+			],
+			"serverClientId": "109401557615-0u5mvavjg3apsdmidr5hkkaccgrkmqn7.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
+		}
+	},
+	"cordova": {}
+}

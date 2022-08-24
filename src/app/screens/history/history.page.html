@@ -1,0 +1,269 @@
+<h5 class="ion-text-center">Historial de ordenes</h5>
+<div style="width: 90%;margin: auto;text-align: center;">
+  <!-- <p class="" style="font-size: 1.2em;">Filtros</p> -->
+  <ion-button [color]="state == 22 ? 'danger': 'light'" (click)="changeState(22)"
+    style="font-size: 0.7em;width: 100px;">No asignadas</ion-button>
+  <ion-button [ngClass]="{'button-orange': state == 23, 'button-light': state != 23 }" (click)="changeState(23)"
+    style="font-size: 0.7em;width: 100px;">Asignadas</ion-button>
+  <ion-button [ngClass]="{'button-yellow': state == 24, 'button-light': state != 24 }" (click)="changeState(24)"
+    style="font-size: 0.7em;width: 100px;">En proceso</ion-button>
+  <ion-button [ngClass]="{'button-green': state == 25, 'button-light': state != 25 }" (click)="changeState(25)"
+    style="font-size: 0.7em;width: 100px;">Finalizadas</ion-button>
+  <ion-button [color]="state == 31 ? 'medium': 'light'" (click)="changeState(31)"
+    style="font-size: 0.7em;width: 100px;">Canceladas</ion-button>
+  <ion-button [color]="state == 0 ? 'primary': 'light'" (click)="changeState(0)" style="font-size: 0.7em;width: 100px;">
+    Todas</ion-button>
+  <!-- <ion-grid style="width: 80%;margin: auto;">
+    <ion-row>
+      <ion-col size="4">
+        
+      </ion-col>
+      <ion-col size="4">
+        
+      </ion-col>
+      <ion-col size="4">
+         
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        
+      </ion-col>
+      <ion-col size="4">
+        
+      </ion-col>
+      <ion-col size="4">
+        <ion-button color="light">Todas</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <div class="row justify-content-center">
+    <div class="col-sm-6 ion-text-center w-50" style="padding: 0 10px">
+      <h4 class="ion-text-center">Fecha Inicio
+      </h4>
+      <ion-item class="input-text date" >
+        <label>{{min_date | date:"dd/MM/yyyy"}} </label>
+        <ion-datetime displayFormat="DD/MM/YYYY" class="hidden" #init cancelText="Cancelar" doneText="Guardar"
+          mode="ios" [max]="max_date" [(ngModel)]="min_date" (ngModelChange)="filterOrders(1)"></ion-datetime>
+        <ion-button fill="clear" slot="end" style="padding: 0;
+        margin: 0;" (click)="changeTime(min_date,'min_date')">
+          <ion-icon name="calendar-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+    <div class="col-sm-6 ion-text-center w-50" style="padding: 0 10px">
+      <h4 class="ion-text-center">Fecha Fin
+      </h4>
+      <ion-item class="input-text date">
+        <label>{{max_date | date:"dd/MM/yyyy" }} </label>
+        <ion-datetime class="input-text hidden" displayFormat="DD/MM/YYYY" #end cancelText="Cancelar" doneText="Guardar"
+          mode="ios" [(ngModel)]="max_date" (ngModelChange)="filterOrders(2)"></ion-datetime>
+        <ion-button fill="clear" slot="end" style="padding: 0;
+        margin: 0;" (click)="changeTime(max_date,'max_date')">
+          <ion-icon name="calendar-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+    </div>
+  </div>
+
+
+
+
+</div>
+<hr>
+
+<ion-content>
+
+  <ng-container *ngIf="orders.length> 0;else elseT">
+    <ion-list mode="ios">
+
+      <ion-card *ngFor="let item of orders" style="margin-bottom: 10px;">
+
+        <div class="ion-text-right">
+          <ion-icon name="storefront" *ngIf="item.zapp_store_order == 1" class="ion-text-left" style="float: left;
+          font-size: 2em;
+          margin-top: 5px;
+          margin-left: 10px;
+          color: #49158c;"></ion-icon>
+          <ion-button fill="clear" size="small" style="" *ngIf="item.status_order == 25 "
+            (click)="showQualification(item)">
+            {{item.score_service ? item.score_service: 0 }}<ion-icon name="star"
+              [ngClass]="{'text-yellow': item.score_service}"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ion-card-content style="padding-top: 0px;padding-bottom: 0px;">
+
+          <ion-button style="--border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          font-size: 0.5em;
+          text-align: center;" color="danger" size="small" *ngIf="item.status_order == 22"
+            [ngClass]="{'ion-float-right': item.zapp_store_order == 1}" (click)="cancel(item)">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+
+          <div style="width:100%;display: flex;">
+            <div class="w-50">
+              ORDEN #{{item.id}}
+            </div>
+            <div style="width: 50%;text-align:right">
+              {{ item.date}}
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <p class=" " style="font-size: 0.8em;">Tipo de Servicio : <strong>{{item.service_type}}</strong>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="row" *ngFor="let ad of filterFirstTwo(item.detail)">
+            <div class="w-50">
+              <strong style="font-size: 0.7em;">{{ad.address}}</strong>
+            </div>
+          </div>
+          <div class="row" *ngIf="item.service_type_id == 3">
+            <div class="w-50">
+              <p class=""> Número de horas : </p>
+            </div>
+            <div style="width: 50%;    ">
+              <strong>{{item.number_hours}}</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <p class=" " style="font-size: 0.8em;">Total : <strong>{{(item.zapp_store_order ==1?item.total_zapp_store:
+                  item.total) | currency:'':'symbol':'1.0' }}</strong>
+              </p>
+            </div>
+          </div>
+          <ng-container *ngIf="item.diligence">
+
+            <div class="row">
+              <p class=" " style="font-size: 0.8em;">Tiempo de espera : <strong>{{item.total_time }} minutos </strong>
+              </p>
+
+            </div>
+            <div class="row">
+              <p class=" " style="font-size: 0.8em;">Monto tiempo de espera :
+                <strong>{{(item.total-(item.order_total?item.order_total:0)) | currency:'':'symbol':'1.0' }}</strong>
+              </p>
+            </div>
+          </ng-container>
+
+
+          <ng-container *ngIf="item.view_more">
+            <div class="row">
+              <div>
+                <p class=" " style="font-size: 0.8em;"> Ciudad : <strong>{{item.city}}</strong></p>
+              </div>
+
+            </div>
+            <div class="row">
+              <div>
+                <p class="" style="font-size: 0.8em;"> Recorrido :<strong>{{item.round_trip ==1 ? 'Ida y Vuelta':
+                    'Ida'}}</strong> </p>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="">
+                <p class="" style="font-size: 0.8em;"> Valor declarado : <strong>{{item.declared_value}}</strong> </p>
+              </div>
+
+            </div>
+            <div class="row">
+              <div>
+                <p class="" style="font-size: 0.8em;"> Tipo de accesorio : <strong>{{item.accessory_type}}</strong></p>
+              </div>
+
+            </div>
+            <div class="row">
+              <div>
+                <p style="font-size: 0.8em;"> Método de pago : <strong>{{item.payment_method}}</strong> </p>
+              </div>
+
+            </div>
+          </ng-container>
+
+
+          <ion-row style="transition: all ease 2s;" class="ion-text-center">
+            <ion-col size="4" (click)="view_order(item)">
+              <ion-button style="height: 40px;
+              width: 70px;
+              font-size: 14px;
+              font-weight: bold;">
+                Ver
+                <ion-icon name="eye-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4" (click)="view_driver(item)" *ngIf="item.drivers.length > 0">
+              <ion-button expand="block" color="success" style="height: 40px;
+              width: 40px;
+              font-size: 10px;
+              font-weight: bold;
+              margin: auto;">
+                <ion-icon name="person-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4" [offset]="item.drivers.length > 0 ?  0 :4">
+              <ng-container *ngIf="item.zapp_store_order!=1;else elseTe">
+                <p style="margin-top:20px"><strong [class]="item.color">{{item.state_order}}</strong></p>
+              </ng-container>
+              <ng-template #elseTe>
+
+                <ion-button fill="clear" class="no-inner-padding state" size="small" *ngIf="getStoreState(item)">
+                  <img [src]="getStoreState(item).image" alt="" srcset="">
+
+                </ion-button>
+                <p *ngIf="!getStoreState(item)">Finalizada</p>
+              </ng-template>
+            </ion-col>
+
+            <h6 class="ion-text-center" [ngClass]="{'hidden': !item.view_more}" *ngIf="item.status_order == 22">Estamos
+              buscando al mensajero más cercano</h6>
+          </ion-row>
+
+
+
+
+
+
+        </ion-card-content>
+
+
+        <div class="row ion-text-center justify-content-center" (click)="viewMore(item)">
+          <ion-button fill="clear" style="
+          height: 20px;
+      ">
+            <ion-icon [name]="item.view_more ? 'chevron-up-outline': 'chevron-down-outline'"></ion-icon>
+          </ion-button>
+        </div>
+
+
+
+      </ion-card>
+
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData(false,$event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+  <ng-template #elseT>
+    <ion-item lines="none">
+      <h4 class="ion-text-center" style="width: 100%;">No tiene ordenes en su historial en estas fechas</h4>
+    </ion-item>
+  </ng-template>
+
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToTransportType()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+</ion-content>

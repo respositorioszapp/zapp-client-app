@@ -1,0 +1,19 @@
+<ion-row>
+
+  <ion-col size="12" class="ion-no-padding">
+    <ion-thumbnail  class="ion-text-center" style="display: block;width: 100%;height: 120px" *ngIf="banners_loading">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </ion-thumbnail>
+    <ion-slides [options]="slideOpts4" *ngIf="!banners_loading">
+      <ion-slide *ngFor="let item of banners" style="max-height: 120px;" (click)="showProducts(item)" >
+        
+        <ion-thumbnail class="banner">
+          <img [src]="item.url_image_banner" alt="" srcset="" style="">
+        </ion-thumbnail>
+      </ion-slide>
+
+    </ion-slides>
+
+
+  </ion-col>
+</ion-row>

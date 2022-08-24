@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary" style="position: relative;" mode="ios">
+    
+    <ion-title style="position: absolute; left: 5px;bottom:14px">Orden #{{order.id}}
+    </ion-title>
+    <ion-button (click)="dismiss()" style="position: absolute; right: 5px;bottom:5px">
+      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="timeline">
+
+    <ng-container *ngIf="order.status_order!=25&& order.status_order!=48; else elseTemplate">
+      <div class="timeline-container " *ngFor="let item of order.details;let i=index">
+        <div [class]="'timeline-icon '+ store_states[item.status].class">
+          <i class="far fa-grin-wink"></i>{{i+1}}
+        </div>
+        <div class="timeline-body">
+          <ng-container *ngIf="order.round_trip==1 && i == (order.details.length-1)">
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-button fill="clear" slot="end">
+                Vuelta
+              </ion-button>
+            </ion-item>
+          </ng-container>
+          <h2>Novedad {{item.id}}</h2>
+          <h4 class="timeline-title"><span [class]="'badge '+ store_states[item.status].class">{{store_states[item.status].message}}</span></h4>
+          <p>{{item.address}}</p>
+          <p>{{item.description}}</p>
+          <div class="time" *ngIf="item.timer">
+            <div id="hms">{{item.timer.hours >9? item.timer.hours:'0'+item.timer.hours}}:{{item.timer.minutes >9? item.timer.minutes:'0'+item.timer.minutes}}:{{item.timer.seconds >9? item.timer.seconds:'0'+item.timer.seconds}}</div>
+          </div>
+          <ng-container *ngIf="order.diligence==1">
+            <div >
+              
+            <p class="ion-text-justify grey-color-text">Total:{{item.total_charge | currency:'':'symbol':'1.0'}}</p>
+            </div>
+          </ng-container>
+          
+        </div>
+      </div>
+      
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="timeline-container " *ngFor="let item of order.details;let i=index">
+        <div [class]="'timeline-icon ' + store_states[item.status].class ">
+          <i class="far fa-grin-wink"></i>{{i+1}}
+        </div>
+        <div class="timeline-body">
+          <ng-container *ngIf="order.round_trip==1 && i == (order.details.length-1)">
+            <ion-button fill="clear">
+              Vuelta
+            </ion-button>
+          </ng-container>
+          
+          <h2>Novedad {{item.id}}</h2>
+          <h4 class="timeline-title">
+            <span [class]="'badge ' + store_states[item.status].class">{{store_states[item.status].message}}</span>
+          </h4>
+          <p>{{item.address}}</p>
+          <p>{{item.description}}</p>
+          <ng-container *ngIf="order.diligence==1">
+            <div >
+              <p class="ion-text-justify black-color-text">Tiempo de espera:{{item.wait_time}} minutos</p>
+            <p class="ion-text-justify grey-color-text">Total:{{item.surplus_money | currency:'':'symbol':'1.0'}}</p>
+            </div>
+          </ng-container>
+          
+        </div>
+      </div>
+    </ng-template>
+    
+
+  </div>
+</ion-content>

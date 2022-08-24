@@ -1,0 +1,22 @@
+<ion-content class="ion-padding ion-text-center">
+  <img src="assets/imgs/beautiful-city.gif" style="height: 380px;
+  max-height: 380px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;">
+  <ion-select placeholder="Seleccciona una ciudad" [interfaceOptions]="customAlertOptions" interface="alert" class="col-md-6 col-xs-12" style="    border: 2px solid rgba(196, 255, 18, 1);
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  border-radius: 20px;
+"  [(ngModel)]="city_id" (ngModelChange)="changeCity()" [selectedText]="city.name">
+    <ion-select-option *ngFor="let c of cities_array" value="{{ c.id }}">{{c.name}}</ion-select-option>
+  </ion-select>
+  <ion-button expand="full" (click)="save()">
+    Guardar
+  </ion-button>
+
+  
+ 
+
+</ion-content>

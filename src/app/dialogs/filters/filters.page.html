@@ -1,0 +1,150 @@
+
+<ion-toolbar class="primary-yellow-background rounded-toolbar" style="position: relative;" mode="ios" >
+  <ion-item lines="none" class="primary-yellow-background">
+    <ion-button (click)="dismiss({cancel:true})" class="primary-yellow-background">
+      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title ><ion-img src="assets/imgs/logo zapp.png" style="width: 100px;height: 60px;margin: auto;" class="ion-text-center"></ion-img>
+    </ion-title>
+  </ion-item>
+
+
+</ion-toolbar>
+
+<ion-content>
+  <app-banners [banners]="banners" [banners_loading]="banners_loading"></app-banners>
+  <ion-row>
+    <h6 class="subtitle">Precio mínimo</h6>
+    
+    <ion-row style="width: 90%;
+    margin: auto;">
+      <ion-col size="9">
+        <ion-item lines="none"  class="ion-no-padding price-item ">
+          <ion-range min="1000" max="100000" mode="ios" color="primary" [(ngModel)]="min"  step="1000">
+            <ion-label slot="start">1000</ion-label>
+            <ion-label slot="end">100000</ion-label>
+          </ion-range>
+          
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item lines="none">
+          <ion-label >
+            {{min}}
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    
+    <h6 class="subtitle">Precio máximo</h6>
+    <ion-row style="width: 90%;
+    margin: auto;">
+      <ion-col size="9">
+        <ion-item lines="none" class="ion-no-padding price-item " >
+          <ion-range [min]="min" max="100000" color="primary" mode="ios" [(ngModel)]="max"  step="1000">
+            <ion-label slot="start">{{min}}</ion-label>
+            <ion-label slot="end">100000</ion-label>
+          </ion-range>
+          
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item lines="none">
+          <ion-label >
+            {{max}}
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center" style="width: 100%;">
+      <ion-button fill="clear" (click)="clearFilter()" class="button-clear">
+        Limpiar Filtros
+      </ion-button>
+    </ion-row>
+  
+    <h5 class="title" style="    margin-left: 5px;">Categorías</h5>
+    <ion-col size="12" style="margin: auto;">
+      <ion-slides [options]="slideOpts3">
+        
+        <!-- <ng-container *ngIf="categories_loading">
+          <ion-slide>
+            <div class="card">
+              <div>
+                <ion-thumbnail slot="start" class="ion-text-center" style="margin: auto;
+                height: 37px;">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+              </div>
+              <p style="font-size: 0.6em;
+            margin: 0;">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </p>
+
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="card">
+              <div>
+                <ion-thumbnail slot="start" class="ion-text-center" style="margin: auto;
+                height: 37px;">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+              </div>
+              <p style="font-size: 0.6em;
+            margin: 0;">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </p>
+
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="card">
+              <div>
+                <ion-thumbnail slot="start" class="ion-text-center" style="margin: auto;
+                height: 37px;">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+              </div>
+              <p style="font-size: 0.6em;
+            margin: 0;">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </p>
+
+            </div>
+          </ion-slide>
+
+
+        </ng-container> -->
+        <ng-container *ngFor="let item of categories;let i = index">
+          <ion-slide   class="slide-categories" (click)="selectCategory(item)" [ngClass]="{'category-selected': item.id == this.category}">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-thumbnail >
+                    <ion-img [src]="item.image ? item.image.src:''" ></ion-img>
+                  </ion-thumbnail>
+                  
+                </ion-col>
+              </ion-row>
+              <ion-row class="reversed-top">
+                <ion-col size="12">
+                  <ion-label style="font-size: 1em;">{{item.name}}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-slide>
+          
+        </ng-container>
+        
+      </ion-slides>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-button color="primary" expand="block" (click)="applyFilters()">
+    Aplicar
+  </ion-button>
+</ion-footer>

@@ -1,0 +1,170 @@
+
+<div style="    margin-top: 3px;">
+  <app-stepper></app-stepper>
+</div>
+<ion-content>
+  <div class="father-container">
+    <div class="son-container">
+      <div class="row justify-content-center">
+        <div class="col-md-11 col-lg-10 col-xl-8 ">
+          <span class="page-title" style="
+              
+              margin: auto;
+              text-align: center;
+              padding: 10px;
+            ">Información adicional</span>
+          <p style="font-size: 12px; color: gray; text-align: center;">
+            Selecciona el día y la hora <br />
+            del servicio
+          </p>
+        </div>
+        <div class="col-md-11 col-lg-10 col-xl-8 ">
+        
+
+          <div class="row justify-content-center">
+            <ion-item lines="none" class="col-sm-12" style="display: block;
+            width: 80%;">
+              <ion-datetime displayFormat="MMMM DD, YYYY"  doneText="Escoger" cancelText="Cancelar"
+              placeholder="Seleccionar fecha" [(ngModel)]="date"  style="border: 2px solid rgba(196, 255, 18, 1);
+              width: 100%;
+              text-align: left;
+              padding: 10px;
+              border-radius: 20px;
+            " (ngModelChange)="capture($event)"></ion-datetime>
+            </ion-item>
+
+            <ion-item lines="none" class="col-sm-12" style="display: block;
+            width: 80%;" *ngIf="quotation.service_type_id != 3">
+              <ion-select style="border: 2px solid rgba(196, 255, 18, 1);
+            width: 100%;
+            text-align: left;
+            max-width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+          " [(ngModel)]="hour" *ngIf="value==0" mode="ios">
+                <ion-select-option value="">
+                  Seleccione una hora
+                </ion-select-option>
+                <ion-select-option value="Inmediato {{currentH}}">
+                  Inmediato
+                  {{currentH}}
+                </ion-select-option>
+                <ion-select-option *ngFor="let hour of hour_array" value="{{ hour }}">
+                  {{ hour }}
+                </ion-select-option>
+              </ion-select>
+              <ion-select style="border: 2px solid rgba(196, 255, 18, 1);
+            width: 100%;
+            text-align: left;
+            max-width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+          " [(ngModel)]="hour" *ngIf="value==1" mode="ios">
+                <ion-select-option value="">
+                  Seleccione una hora
+                </ion-select-option>
+                <ion-select-option *ngFor="let hour of hour_arrayN" value="{{ hour }}">
+                  {{ hour }}
+                </ion-select-option>
+              </ion-select>
+              <ion-select style="border: 2px solid rgba(196, 255, 18, 1);
+            width: 100%;
+            max-width: 100%;
+            text-align: left;
+            padding: 10px;
+            border-radius: 20px;
+          " [(ngModel)]="hour" *ngIf="value==2" mode="ios">
+                <ion-select-option value="">
+                  Seleccione una fecha valida
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <!-- <ion-item lines="none" class="col-sm-12" style="display: block;
+              
+            width: 90%;">
+            </ion-item> -->
+
+
+          </div>
+          <br />
+
+
+          <div class=" ">
+            <span class="page-title" style="
+               
+                margin: auto;
+                text-align: center;
+                padding: 10px;  
+              ">¡Ya casi terminamos!</span>
+          </div>
+          <div class="row justify-content-center">
+            <h6 style="color: gray;text-align: center;font-size: 0.8em;"><strong>¿Cuál es el valor declarado de tu mercancía?</strong>
+            </h6>
+            <ion-item lines="none" style="width: 80%;display: block">
+
+              <ion-input matInput #price maxlength="8" id="price" [(ngModel)]="quotation.cargo_price" maxlength="8"
+                (keyup)="onlyNumber($event.target.value)" style="border: 2px solid rgba(196, 255, 18, 1);
+                  padding: 7px !important;
+                  border-radius: 20px;
+                  width: 100%;
+                  display: block;
+                  text-align: center;
+                  outline:none;"></ion-input>
+
+
+
+            </ion-item>
+            <br/>
+            <br/>
+
+            <p style="    font-size: 12px;
+            color: gray;
+            text-align: center;
+            margin: auto;
+            width: 100%;">
+              {{ price.value.toString().length }} / 8
+            </p>
+
+            <h6 style="color: gray;
+            /* text-align: center; */
+            width: 100%; font-size: 0.8em;"><strong>Accesorio</strong>
+            </h6>
+            <br/>
+            <ion-item lines="none" style="width: 80%;display: block;">
+
+              <ion-select placeholder="Select One" mode="ios" [(ngModel)]="quotation.accessory_id" style="border: 2px solid rgba(196, 255, 18, 1);
+              width: 100%;
+              text-align: left;
+              padding: 7px !important;
+              max-width: 100%;
+              border-radius: 20px;" [selectedText]="accesory.name" (ngModelChange)="changeAccesory()">
+                <ion-select-option *ngFor="let c of accessory_array" value="{{ c.id }}">{{ c.name }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+
+
+
+
+            <br />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>
+<div class="col-md-11 col-lg-10 col-xl-8 m-auto" style="margin: auto;">
+  <ion-button mode="ios" (click)="navigate()">
+    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+    <ion-icon name="arrow-left"></ion-icon>
+    Atrás
+  </ion-button>
+  <ion-button mode="ios" (click)="next()">
+    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+    Siguiente
+  </ion-button>
+</div>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">zapp-client-app</string>
+    <string name="title_activity_main">zapp-client-app</string>
+    <string name="package_name">com.zapp.client.app</string>
+    <string name="custom_url_scheme">com.zapp.client.app</string>
+    <string name="fb_app_id">795693851435584</string>
+    <string name="fb_app_name">Zapp logistica</string>
+</resources>

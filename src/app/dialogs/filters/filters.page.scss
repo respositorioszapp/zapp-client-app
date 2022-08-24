@@ -1,0 +1,97 @@
+.category-selected {
+    background: #69019c !important;
+    color: #b1ff00 !important;
+}
+
+.rounded-toolbar {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    & ion-button {
+        --color: blueviolet;
+    }
+}
+
+.subtitle {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.button-clear {
+    margin: 10px auto;
+    background: #a1e110;
+    border-radius: 20px;
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+.price-item {
+    width: 100%;
+    padding: 5px;
+    background: #f2f2f2;
+    border-radius: 20px;
+    /*Remove inner padding of a ion-item*/
+    --padding-end: 0px;
+    --inner-padding-end: 0px;
+
+    & ion-range {
+        background: #f2f2f2;
+        width: 100%;
+        --knob-size: 20px;
+    }
+}
+
+.slide-categories {
+    min-height: 93px;
+    min-width: 100px;
+    max-width: 30%;
+    border-radius: 10px;
+    & ion-grid {
+        padding: 0;
+
+        & ion-row {
+            padding: 0;
+
+            &.reversed-top {
+                margin-top: -10px;
+
+                & ion-label{
+                    font-size: 0.65em !important;
+                }
+            }
+
+            & ion-col {
+
+                & ion-thumbnail {
+                    border-radius: 20px;
+                    width: 100%;
+                    min-width: 91px;
+                    --border-radius: 20px;
+                    height: 90px;
+                    max-height: 90px;
+
+                    & ion-img {
+                        width: 100%;
+                        border-radius: 10px;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                        & img{
+                            width: auto !important;
+                            max-width: 100%;
+                        }
+                    }
+                }
+
+                & img {
+                    height: 50px;
+                    max-height: 50px;
+                    min-height: 50px;
+                    width: 100%;
+                    min-width: 90px;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+}

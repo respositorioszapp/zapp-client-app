@@ -1,0 +1,105 @@
+<ion-menu side="end" menuId="first" #menu contentId="main">
+
+  <ion-content>
+    <ion-list style="    padding: 0;">
+
+      <div class="ion-text-center image banner-img" style=" 
+  ">
+        <img src="assets/imgs/logo zapp.png" class="logo" alt="">
+        <img src="assets/imgs/menu-1.png" class="moto" alt="" style="">
+      </div>
+      <ion-item (click)="goToOrders()" lines="none">
+        <ion-icon name="home-icon"></ion-icon>
+        <ion-label>
+          Inicio
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" (click)="goToSelectCity()">
+        <ion-icon name="location-icon"></ion-icon>
+        <ion-label>
+          Cambiar de ciudad
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="auth.user.email!='invitado@zapplogistica.com'" (click)="goToHistory()" lines="none">
+        <ion-icon name="historial"></ion-icon>
+
+        <ion-label>
+          Mis ordenes
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="auth.user.email!='invitado@zapplogistica.com'" (click)="goToWishList()" lines="none">
+        <ion-icon name="favoritos"></ion-icon>
+        <ion-label>
+          Favoritos
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="auth.user.email!='invitado@zapplogistica.com'" (click)="goToProfile()" lines="none">
+        <ion-icon name="profile"></ion-icon>
+        <ion-label>
+          Cuenta
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="exit-z"></ion-icon>
+        <ion-label>
+          Acerca de nosotros
+        </ion-label>
+      </ion-item>
+
+
+      <ion-item (click)="logOut()" lines="none">
+        <ion-icon name="exit-z"></ion-icon>
+        <ion-label>
+          Cerrar sesión
+        </ion-label>
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+<!-- <ion-header translucent="true">
+  
+</ion-header> -->
+<app-toolbar></app-toolbar>
+<ion-content id="main" (click)="showCart()">
+
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>
+
+<div *ngIf="!auth.person?.hide_cart && this.auth.person?.cart_items && this.auth.person?.cart_items.length > 0 "
+  class="cart" (click)="viewCart()">
+  <div class="column">
+    <!-- <ion-icon name="basket" style="font-size: 1.7em;" slot="start"></ion-icon> -->
+    <ion-badge>{{this.auth.person.quantity}}</ion-badge>
+  </div>
+  <div class="column">
+    <ion-label style="" class="view_cart">Ver canasta</ion-label>
+  </div>
+  <div class="column">
+    <ion-label slot="end">{{ (this.auth.person.total ? this.auth.person.total :0) | currency:'':'symbol':'1.0'}}
+    </ion-label>
+  </div>
+</div>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="home-icon"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="search">
+      <ion-icon name="find"></ion-icon>
+      <ion-label>Buscar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button  (click)="openMenu($event)">
+      <ion-icon name="profile"></ion-icon>
+      <ion-label >Cuenta</ion-label>
+    </ion-tab-button>
+    <ion-tab-button *ngIf="user.email != 'invitado@zapplogistica.com'"  tab="wish-list" >
+      <ion-icon name="favoritos"></ion-icon>
+      <ion-label>Favoritos</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

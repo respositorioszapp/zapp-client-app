@@ -1,0 +1,33 @@
+h2{
+    margin: 0 auto;width: 90%;
+
+    &.not-image{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    &.not-title{
+        margin-top: 40px;
+        font-family: 'Gilroy-ExtraBold' !important;
+        font-weight: bold;
+    }
+}
+
+.buttons{
+    height: 35px;
+    font-family: 'Gilroy-ExtraBold' !important;
+
+}
+
+h1{
+    margin: 0;
+    text-align: center;
+    font-weight: bold
+
+    
+}

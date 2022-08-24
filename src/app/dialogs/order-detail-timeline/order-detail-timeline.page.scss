@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css?family=Niramit:300,300i,700');
+
+
+ion-content {
+    --background: #f2f2f2;
+}
+
+// reset some browser default styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// colors
+$primary: #1d8cf8;
+$secondary: #1d8cf8;
+$info: #11cdef;
+$success: #00bf9a;
+$warning: #ff8d72;
+$danger: #fd5d93;
+$dark:#1e1e2f;
+$in-proccess:rgb(213, 216, 38);
+
+// timeline variablesrgb(255 255 255)
+$body-bg: #1e1e2f;
+$timeline-before-bg : #c3c2c37d;
+$timeline-body-bg: rgb(255 255 255);
+
+$timeline-body-round: 3px;
+$timeline-body-shadow: 10px 7px 9px rgb(0 0 0 / 10%);
+
+$primary-icon-color :#49158c ;
+;
+
+body {
+    font-family: 'K2D', sans-serif;
+    background: $body-bg;
+    letter-spacing: 1px;
+}
+
+// page container
+.container {
+    max-width: 650px;
+    margin: 50px auto;
+}
+
+// typography
+p {
+    font-weight: 300;
+    line-height: 1.5;
+    font-size: 14px;
+    opacity: .8;
+}
+
+// timeline style
+.timeline {
+    position: relative;
+    padding-left: 2.45rem;
+    margin: 4px 0 0 23px;
+    color: #222428;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: $timeline-before-bg;
+    }
+
+    .timeline-container {
+        position: relative;
+        margin-bottom: 2.5rem;
+        ;
+
+        .timeline-icon {
+            position: absolute;
+            left: -55px;
+            top: 10px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 1rem;
+            padding: 8px;
+            color: white;
+            background-color: $primary-icon-color;
+            
+
+            // background: $secondary;
+
+            i {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
+
+        .timeline-body {
+            background: $timeline-body-bg;
+            border-radius: $timeline-body-round;
+            padding: 20px 20px 15px;
+            box-shadow: $timeline-body-shadow;
+
+            &:before {
+                content: '';
+                background: inherit;
+                width: 20px;
+                height: 20px;
+                display: block;
+                position: absolute;
+                left: -10px;
+                transform: rotate(45deg);
+                border-radius: 0 0 0 2px;
+            }
+
+            .timeline-title {
+                margin-bottom: 1.4rem;
+
+                .badge {
+                    background: #2dd36f !important;
+                    padding: 4px 8px;
+                    border-radius: 3px;
+                    font-size: 12px;
+                    font-weight: bold;
+                    color: white;
+
+                }
+            }
+
+            .timeline-subtitle {
+                font-weight: 300;
+                font-style: italic;
+                opacity: .4;
+                margin-top: 16px;
+                font-size: 11px;
+            }
+        }
+
+
+
+    }
+}
+
+
+.author {
+    font-family: inherit;
+    padding: 3em;
+    text-align: center;
+    width: 100%;
+    color: white;
+
+    a:link,
+    a:visited {
+        color: white;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .btn:link,
+    .btn:visited {
+        margin-top: 1em;
+        text-decoration: none;
+        display: inline-block;
+        font-family: inherit;
+        font-weight: 100;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+        background-color: black;
+        padding: 1.5em 2rem;
+        border-radius: 1em;
+        transition: .5s all;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: lighten(black, 10%);
+        }
+    }
+}
+
+.time {
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    background: white;
+}
+
+.time ion-button {
+    z-index: 1;
+}
+
+.time #hms {
+    color: black;
+    font-size: 2em;
+    z-index: 1;
+    letter-spacing: 8px;
+}

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">zapp-client-app</string>
+    <string name="title_activity_main">zapp-client-app</string>
+    <string name="package_name">com.zapp.client.app</string>
+    <string name="custom_url_scheme">com.zapp.client.app</string>
+    <string name="server_client_id">109401557615-0u5mvavjg3apsdmidr5hkkaccgrkmqn7.apps.googleusercontent.com</string>
+</resources>

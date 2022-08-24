@@ -1,0 +1,344 @@
+// colors
+$primary: #497cd5;
+$secondary: #1d8cf8;
+$info: #11cdef;
+$success: #00bf9a;
+$warning: #ff8d72;
+$danger: #fd5d93;
+$dark: #1e1e2f;
+$in-proccess: rgb(213, 216, 38);
+
+
+.total {
+    background-color: #497cd5;
+    height: 30px;
+    padding: 7px;
+    color: White;
+    font-family: 'Gilroy-ExtraBold' !important;
+    margin: auto 5%;
+    font-size: 1.2em;
+    font-weight: 900;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.driver-item {
+    width: 90%;
+    /* border: solid 2.5px #929095; */
+    padding: 0;
+    margin: 10px auto;
+    color: white;
+    --background: #49158c;
+    border-radius: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.time {
+        /* height: 47px; */
+        display: flex;
+        width: 100%;
+        align-items: center;
+        /* justify-content: center; */
+        background: white;
+}
+
+.time ion-button {
+    z-index: 1;
+}
+
+.time #hms {
+    color: black;
+    font-size: 0.8em;
+    z-index: 1;
+    letter-spacing: 8px;
+    margin-top: 5px;
+    //font-family: 'Gil';
+    font-weight: 900;
+    font-family: 'Gilroy-ExtraBold' !important;
+    margin-left: 5px;
+}
+
+
+.driver-item ion-button {
+    color: white
+}
+
+.card-absolute {
+    position: absolute;
+    bottom: 64px;
+    left: 0;
+    right: 0;
+    margin: auto 10%;
+    padding: -5px;
+    border-radius: 30px;
+
+    & ion-button {
+        &.view-detail {
+            --border-radius: 40px;
+            border-radius: 0;
+            --border-radius: 30px !important;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            margin: 0;
+            padding: -5px;
+            --background: #3880ff;
+        }
+
+        &.state {
+            &.completed {
+                height: 100%;
+                font-size: 1.5em;
+
+                &.cancelled {
+                    filter: grayscale(1);
+                }
+            }
+
+
+
+            --padding-start: 0;
+            --padding-end: 0;
+            width: 100%;
+            min-width: 70px;
+            margin: 5px auto;
+            font-size: 2em;
+
+            & ion-icon {
+                font-size: 1.5em;
+            }
+
+
+            & img,
+            lottie-player,
+            ng-lottie {
+                height: 65px;
+                width: 65px;
+                border: 2px solid #0eda0e;
+                border-radius: 100%;
+                // padding: 5px;
+            }
+        }
+
+        &.border-top-gray {
+            border-top: 1px solid #ccc;
+        }
+    }
+
+    p {
+        &.status_message {
+            font-size: 1.1em;
+            font-weight: bolder;
+            color: black;
+            min-height: 72px;
+        }
+    }
+
+    .cancel {
+        position: relative;
+
+        & ion-button {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+        }
+    }
+
+    & .shop_image {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+    }
+}
+
+
+.timeline-title {
+    margin-left: 10px;
+
+    .badge {
+        background: #2dd36f;
+        padding: 4px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+
+        &.success {
+            background-color: $primary !important;
+        }
+
+        &.warning {
+            background-color: $danger !important;
+        }
+
+        &.danger {
+            background-color: $warning !important;
+        }
+
+        &.in-proccess {
+            background: #2dd36f;
+        }
+
+        &.not-effective{
+            background-color: $dark;
+        }
+    }
+}
+
+.card-absolute-normal {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: auto 5%;
+    padding: -5px;
+    border-radius: 30px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: none;
+
+    & .view-detail {
+        border-radius: 26px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        left: 0;
+        right: 0;
+        text-transform: uppercase;
+        z-index: 1000;
+        font-weight: 900;
+        text-align: center;
+        color: white;
+        margin: 0;
+        padding: 10px;
+        background: $primary;
+
+
+    }
+
+    & .toolbar {
+        //border: 0.5px solid #d7d8da;
+        /* border-bottom-left-radius: 20px; */
+        border-radius: 20px;
+        /* border-bottom-right-radius: 20px; */
+        /* margin-right: 10px; */
+        /* margin-left: 10px; */
+        width: 100%;
+        margin: auto;
+        --background: transparent;
+
+        & ion-item {
+            --background: transparent;
+
+            & ion-avatar {
+                padding: 2px;
+                border: 2px solid white;
+                width: 70px;
+                height: 70px;
+            }
+
+            & .status {
+                position: absolute;
+                right: 10px;
+                padding-left: 10px;
+                
+                color: white;
+                border-top-left-radius: 30px;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+                width: 45%;
+                font-size: 0.7em;
+                bottom: 0;
+                height: 25px;
+                display: flex;
+                align-items: center;
+
+                &.completed{
+                    background-color: red;
+                    --background:red;
+                }
+
+                &.in-process{
+                    background-color: $primary;
+                }
+
+                &.not-effective{
+                    background-color: $dark;
+                }
+
+            }
+        }
+    }
+
+    & .div-max-height {
+        max-height: 200px;
+        overflow: auto;
+        transition: height 2s;
+    }
+
+    & ion-badge {
+        padding: 5px;
+        margin-left: 5px;
+    }
+
+}
+
+.status-success{
+    background-color: ($success);
+    --background:($success);
+    border-radius: 20px;
+    box-shadow: none;
+    &::part(native){
+        border-radius: 20px;
+        box-shadow: none;
+    }
+}
+
+.v-none{
+    visibility: hidden;
+}
+
+.status-completed{
+    background-color: red;
+    --background:red;
+    border-radius: 20px;
+    box-shadow: none;
+    &::part(native){
+        border-radius: 20px;
+        box-shadow: none;
+    }
+}
+
+.status-in-process{
+    background-color: $primary;
+    --background: $primary;
+    border-radius: 20px;
+    box-shadow: none;
+    ::part(native){
+        border-radius: 20px;
+        box-shadow: none;
+    }
+}
+
+.status-not-effective{
+    background-color: $dark;
+    --background:$dark;
+    border-radius: 20px;
+    box-shadow: none;
+    ::part(native){
+        border-radius: 20px;
+        box-shadow: none;
+    }
+}
+
+.view-detail-button {
+    margin: auto;
+    width: 80%;
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    left: 0;
+}

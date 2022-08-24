@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary" style="position: relative;" mode="ios">
+    <ion-item lines="none" color="primary">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-avatar style="width: 40px;
+    height: 40px;">
+        <ion-img [src]="driver.photo_driver != null ? driver.photo_driver : 'assets/imgs/avatar.svg'" (click)="viewImage(driver.photo_driver)"></ion-img>
+
+      </ion-avatar>
+      <ion-title >{{driver.driver_name}}
+      </ion-title>
+    </ion-item>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content forceOverscroll="true">
+  <div style="text-align: right;float:right;clear: both;" *ngFor="let item of events">
+    <ion-img [src]="item.photo" alt="" *ngIf="item.photo" style="width: 200px;
+    height: 100px;
+    margin-right: 10px;
+    float: right;
+    margin-bottom: 10px;" (click)="viewImage(item.photo)"></ion-img>
+    <p style="margin-bottom: 5px;font-size: 1em;margin-right: 10px;" *ngIf="item.description">
+
+      <span style="text-align: right;
+      background: #49158c;
+      padding: 9px;
+      border-radius: 10px;
+      color: white;
+      display: block;
+      width: max-content;
+      float: right;
+      max-width: 300px;">{{item.description}}<ion-icon
+          [name]="!item.sending ? 'checkmark-outline': 'checkmark-done-outline'"></ion-icon></span>
+    </p>
+    <p class="grey-color-text" style="margin-bottom: 5px;font-size: 1em; margin-right: 10px;clear: both;">
+      {{ item.created_at | date:'HH:MM'  }}</p>
+  </div>
+</ion-content>
+

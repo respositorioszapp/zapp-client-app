@@ -1,0 +1,9 @@
+<ion-content>
+  <p class="ion-text-center">{{title?title:'Seleccione la hora'}}</p>
+  <ion-datetime presentation="time" displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="value" *ngIf="inputType=='time'"></ion-datetime>
+  <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" presentation="date" [(ngModel)]="value" *ngIf="inputType=='date'"></ion-datetime>
+  <ion-row style="justify-content: space-around;">
+    <ion-button fill="outline" (click)="dismiss()">Cancelar</ion-button>
+    <ion-button (click)="confirm()">Confirmar</ion-button>
+  </ion-row>
+</ion-content>

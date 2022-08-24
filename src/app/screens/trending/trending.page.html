@@ -1,0 +1,34 @@
+
+
+<ion-content>
+  <ion-item  lineS="none" style="--background: #a1e110">
+    <ion-input placeholder="Buscar..." style="    background: white;
+    color: black;
+    border-radius: 20px;
+    padding: 5px !important;"></ion-input>
+
+  </ion-item>
+  <ion-card mode="ios" style="width: 80%;margin: 10px auto;" *ngFor="let item of array3" (click)="showProduct(item)">
+    <ion-badge color="primary" style="position: absolute;right: 0;">3.5</ion-badge>
+    <ion-card-content style="display: flex;padding: 0;">
+      <img [src]="item.image" alt="" style="display: block;width: 100px;height: 100px;">
+      <div style="width: 80%;padding: 10px;">
+        <h3>{{item.business}}</h3>
+        <h5>{{item.product}}</h5>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-card-subtitle>{{item.time}}</ion-card-subtitle>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card-subtitle>{{item.calification}} <ion-icon style="color: #ecec3e;
+            " name="star"></ion-icon>
+            </ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

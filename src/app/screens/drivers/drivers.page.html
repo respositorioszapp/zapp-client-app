@@ -1,0 +1,48 @@
+<div class="col-md-12 " style="    margin-top: 3px;">
+  <div class="col-5 ">
+    <app-stepper></app-stepper>
+  </div>
+</div>
+
+<ion-content>
+  <p class="ion-text-center" style="margin: 10px auto;
+  width: 60%;">Configurar el horario de cada motorizado</p>
+  <ion-list mode="ios">
+    <ion-item *ngFor="let item of driver_count_array; let i = index" lines="none" class="ion-text-center driver-item">
+      <ion-label>{{item.driver}}</ion-label>
+      <ion-button fill="clear" (click)="openDialog(item)">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="rmDriver(i,item)" color="danger" *ngIf="i > (count-1)">
+        <ion-icon name="remove-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-button slot="end" style="    --border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      color: white;" color="primary" (click)="addDriver()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+<ion-item color="primary" lines="none" style="text-align: center;
+margin: auto;
+border-radius: 40px;">
+  <ion-text slot="start">Precio {{total}}</ion-text>
+  <ion-text>Duración {{getTime() + " HORAS" |uppercase}} </ion-text>
+</ion-item>
+<div class="col-md-11 col-lg-10 col-xl-8 m-auto" style="margin: auto;">
+  <ion-button mode="ios" routerLink="/tabs/add-driver">
+    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+    <ion-icon name="arrow-left"></ion-icon>
+    Atrás
+  </ion-button>
+  <ion-button mode="ios" (click)="next()">
+    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+    Siguiente
+  </ion-button>
+</div>

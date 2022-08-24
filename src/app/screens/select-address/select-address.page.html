@@ -1,0 +1,154 @@
+<app-stepper style="margin-bottom: 10px;"></app-stepper>
+<div class="row justify-content-center" style="margin-right: 0;
+margin-left: 0; width: 100%;">
+  <div class="col-md-11 col-lg-10 col-xl-8 " style="">
+    <span style="
+            background: #eeeeee;
+  color: gray;
+  padding-right: 130px;
+  padding-left: 130px;
+  border-radius: 30px;
+  font-size: 21px;
+  display: block;
+          ">Direcciones</span>
+  </div>
+</div>
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <div class="row justify-content-center heigth-1" style="">
+
+    <div *ngFor="let item of address_arr; let i = index" class="addresstask ">
+
+      <div style="display: flex; flex-direction: column; width: 100%;">
+        <ion-button fill="clear" size="small" class="favorite" [ngClass]="{'favoactive': item.favorite}" style="" (click)="saveFavoriteAddress(item)">
+          <ion-icon name="star" color="warning" slot="icon-only"></ion-icon>
+        </ion-button>
+        <div class="addresstask-icon text-center">
+          <ion-button shape="round" size="small" class="mat-elevation-z0" (click)="rm(i)" style="width: 100%;
+            height: 100%;">
+            {{item.index}}
+          </ion-button>
+        </div>
+        <button mat-stroked-button class="addresstask-address-btn"
+          [ngClass]="{'selected': item.selected , 'invalid': item.address_invalid}" (click)="openDialog(item,i)" style="
+        word-wrap: break-word !important;
+        font-family: 'Gilroy-Light';
+        border-top: 0.5px solid rgb(218 218 218);
+  border-right: 0.5px solid rgb(218 218 218);
+  border-left: 0.5px solid rgb(218 218 218);  
+      ">
+          {{
+        (item.address
+          ? item.address
+          : "Digita aquí dirección de " +
+            ((item.index - 1) % 2 == 0 ? "origen" : "destino"))
+      }}
+        </button>
+
+        <textarea (keyup)="keyUp(item, 'description')" class="addresstask-task"
+          [ngClass]="{'invalid': item.description_invalid}" autocomplete="off" [(ngModel)]="item.description"
+          placeholder="¿Qué hacer al llegar a esta dirección? 
+      " cols="30" rows="2" maxlength="500" style="
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border: 0.5px solid rgb(218 218 218);">
+    </textarea>
+        <ion-note class="ion-text-center" color="primary" style="margin-bottom: 10px;margin-bottom: 10px;">Especifique
+          si es Oficina, apto, interior, etc.</ion-note>
+
+
+
+        <div style="display: flex; ">
+          <textarea (keyup)="keyUp(item, 'contact_name')"
+            style="width: 50%; margin-right: 2%;border: 0.5px solid rgb(218 218 218);" class="addresstask-task"
+            [ngClass]="{'invalid': item.contact_name_invalid}" [(ngModel)]="item.contact_name"
+            placeholder="Nombre del contacto" cols="30" rows="2" maxlength="500" autocomplete="off">
+    </textarea>
+          <input type="number" (keyup)="keyUp(item, 'contact_phone')" class="addresstask-task"
+            [ngClass]="{'invalid': item.contact_phone_invalid}" autocomplete="off" [(ngModel)]="item.contact_phone"
+            placeholder="Teléfono del contacto" onkeydown="javascript: return event.keyCode === 8 ||
+            event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+            style="width: 50%;border: 0.5px solid rgb(218 218 218);padding: 0 5px;" />
+          <!-- <textarea minlength="7" maxLength="10" style="width: 50%;border: 0.5px solid rgb(218 218 218);" cols="30"
+            rows="2" maxlength="500">
+    </textarea> -->
+        </div>
+      </div>
+
+
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item lines="none" style="--background: #49158c00;">
+            <ion-toggle color="primary" [(ngModel)]="quotation.round_trip" mode="ios">
+
+            </ion-toggle>
+            <ion-label class="toogle-label">IDA Y VUELTA</ion-label>
+          </ion-item>
+
+        </ion-col>
+        <ion-col size="6">
+          <ion-item lines="none" style="--background: #49158c00;">
+            <ion-toggle color="primary" mode="ios" [(ngModel)]="quotation.diligence">
+
+            </ion-toggle>
+            <ion-label class="toogle-label">DILIGENCIA</ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+      <ion-row *ngIf="this.quotation.service_type_id == '2'" style="--background: #49158c00;">
+        <ion-col size="6" style="--background: #49158c21;">
+          <ion-button size="default" fill="outline" (click)="add()">
+            agregar direcciones
+          </ion-button>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- <ion-list lines="none">
+      <ion-item>
+        <ion-item slot="start">
+          
+        </ion-item>
+        <ion-item>
+          
+          
+        </ion-item>
+        
+      </ion-item>
+      
+    </ion-list> -->
+
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="bottom_reached && address_arr.length > 2"
+    (click)="myContent.scrollToTop(300)">
+    <ion-fab-button style="width: 40px;
+    height: 40px;">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+</ion-content>
+<!-- <ion-list inset="true" style="margin: 0;">
+  <ion-item slot="start">
+
+    
+  </ion-item>
+</ion-list> -->
+<div class="col-md-11 col-lg-10 col-xl-8 m-auto" style="margin: auto;">
+  <ion-button mode="ios" routerLink="/tabs/select-city">
+    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+    <ion-icon name="arrow-left"></ion-icon>
+    Atrás
+  </ion-button>
+  <ion-button mode="ios" (click)="next()">
+    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+    Siguiente
+  </ion-button>
+</div>

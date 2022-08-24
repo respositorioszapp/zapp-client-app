@@ -1,0 +1,110 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>service-type</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<div>
+  <app-stepper></app-stepper>
+</div>
+<ion-content>
+  <div class="son-container" style="text-align: center;
+
+  margin-top: 12px;">
+    <div class="row justify-content-center">
+      <!--stepper-->
+
+      <!--form-->
+      <div class="col-md-11 col-lg-10 col-xl-8" style="margin-bottom: 10px;">
+        <div class="title">
+          <span style="
+              background: #eeeeee;
+    color: gray;
+    text-align: center;
+    /* margin-right: 20px; */
+    padding: 10px 0px;
+    /* padding-right: 5px; */
+    /* padding-left: 5px; */
+    border-radius: 30px;
+    /* background-size: 20px; */
+    display: block;
+    width: 80%;
+    margin: auto;
+            ">¿Qué tipo de servicio deseas?</span>
+        </div>
+
+
+        <!--  <label *ngFor="let item of service_array" class="radio-button lg text-center text-muted">
+                    <input type="radio" [(ngModel)]="quotation.service_type_id" value="{{item.id}}" class="hidden">
+                    <div [class]="quotation.service_type_id == item.id ? 'radio-button-box radio-button-box-active' : 'radio-button-box'">
+                        <img src="../../../../assets/imgs/{{item.img}}"  height="80">
+                        <div class="radio-button-box-type pt-1">{{item.name}}</div>
+                    </div>
+                </label> -->
+        <ion-row>
+          <ion-col size="6" [ngClass]="{'m-auto': i == (service_array.length-1)}"
+            *ngFor="let item of service_array;let i = index">
+            <label class="radio-button lg ion-text-center text-muted" style="width: 100%;">
+              <input type="radio" [(ngModel)]="quotation.service_type_id" value="{{ item.id }}" class="hidden" />
+              <div [class]="
+                  quotation.service_type_id == item.id
+                    ? 'radio-button-box radio-button-box-active'
+                    : 'radio-button-box'
+                " style="width: 100%;">
+                <img class="imagen" src="assets/imgs/{{ item.img }}" />
+                <div class="radio-button-box-type" style="width: 100%;">
+                  <b>{{ item.name }}</b>
+                </div>
+              </div>
+            </label>
+          </ion-col>
+        </ion-row>
+
+      </div>
+
+      <!-- <div class="col-md-8 col-lg-8 col-xl-6" style="margin-bottom: 10px;">
+        <div class="text-muted font-size-16" style="margin-bottom: 4px; font-family:Gilroy-Light;">
+          ¿Desea solicitar una carga masiva?
+          <div style="    width: 56px;
+          border-radius: 10px;
+          height: 4px;
+          background-color: #49158c;
+          margin: auto;
+          margin-top: 10px;"></div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-xs-6">
+
+        </div>
+
+      </div> -->
+
+
+      <!-- <div class="col-md-11 col-lg-10 col-xl-8">
+        <button mat-button style="font-size: 12px;
+              border-radius: 8px;
+              background-color: #49158c;
+              margin-bottom: 20px;
+              
+
+              " (click)="payment()">
+          <strong style="font-family: Gilroy-Light; color:white">Solicitar Carga Masiva</strong>
+
+        </button>
+      </div> -->
+
+      <!--button next-->
+      <div class="col-md-11 col-lg-10 col-xl-8">
+        <ion-button mode="ios" routerLink="/tabs/transport-type">
+          <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+          <ion-icon name="arrow-left"></ion-icon>
+          Atrás
+        </ion-button>
+        <ion-button mode="ios" (click)="next()">
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+          Siguiente
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

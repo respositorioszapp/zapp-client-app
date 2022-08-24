@@ -1,0 +1,170 @@
+<div class="col-md-12  ">
+  <div class="col-5 m-auto">
+    <app-stepper></app-stepper>
+  </div>
+</div>
+<div class="col-md-11 col-lg-10 col-xl-8 " style="    text-align: center;
+width: 80%;
+margin: auto;">
+  <span style="
+        background: #eeeeee;
+    color: gray;
+    /* padding-right: 90px; */
+    /* padding-left: 90px; */
+    padding: 7px;
+    border-radius: 30px;
+    font-size: 19px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 10px auto;
+
+    ">Resumen del servicio</span>
+</div>
+<ion-content>
+  <div #map id="map" style="width: 100%;height: 50%;"></div>
+  <div class="col-md-5 col-xs-11" style="max-height: 89%;
+          height: 89%;">
+    <div style="
+     
+     width: 80%;
+      margin: 8px auto;
+
+              ">
+      <div class="row ">
+        <div class="col-sm-4 col-xs-12 justify-content-center" style="color: #4992e7; font-family: Gilroy-ExtraBold;  font-size: 19px;
+        text-align: center;
+        width: 33.3333333%;">
+          <img class="summary-icon" src="assets/imgs/moton-icon.png"
+            *ngIf="quotation.transport_type == 'Motorizado'" />
+          <img class="summary-icon" src="assets/imgs/carryn-icon.png"
+            *ngIf="quotation.transport_type == 'Carry'" />
+          <img class="summary-icon" src="assets/imgs/carn-icon.png"
+            *ngIf="quotation.transport_type == 'Automóvil'" />
+          <br />
+          {{ quotation.transport_type }}
+        </div>
+        <div class="col-sm-4 col-xs-12 justify-content-center" style="color: #f5a448; font-family: Gilroy-ExtraBold;text-align: center;width: 33.3333333%; ">
+          <img class="summary-icon" src="assets/imgs/kmsn-icon.png" />
+
+          <br />
+          {{ distance }} {{unity| uppercase}}
+        </div>
+        <div class="col-sm-4 col-xs-12 justify-content-center" style="color: #6cc286; font-family: Gilroy-ExtraBold;text-align: center;width: 33.3333333%;">
+          <img class="summary-icon" src="assets/imgs/timen-icon.png" />
+          <br />
+          {{ duration_text}}
+        </div>
+      </div>
+    </div>
+    <br />
+    <div style="
+                       background: #f2f2f2;
+    border-radius: 20px;
+    
+    
+    
+    width: 80%;
+   margin: auto;
+              ">
+      <ion-list style="text-align: left !important;
+      font-size: 22px !important;
+      margin: 0;
+      padding: 0;
+      border-radius: 20px;">
+        <ion-item lines="none" style="height: 40px;     --background: #f2f2f2;">
+          <ion-icon><img src="assets/imgs/city-icon.png" /></ion-icon>
+          <div mat-line style="font-size: 15px; font-family: Gilroy-Light;">
+            <span style="
+                        color: #49158a;
+                        font-size: 15px;
+                        font-family: Gilroy-ExtraBold;
+                      ">Ciudad:</span>
+            {{ quotation.city }}
+          </div>
+        </ion-item>
+        <ion-item lines="none" style="height: 40px; --background: #f2f2f2;">
+          <ion-icon><img src="assets/imgs/type-icon.png" /></ion-icon>
+          <div mat-line style="font-size: 15px; font-family: Gilroy-Light;">
+            <span style="
+                        color: #49158a;
+                        font-size: 15px;
+                        font-family: Gilroy-ExtraBold;
+                      ">Tipo:</span>
+            {{ quotation.round_trip ? "Ida y Vuelta" : "Solo ida" }}
+          </div>
+        </ion-item>
+
+        <ion-item lines="none" style="height: 40px;    --background: #f2f2f2; " *ngIf="quotation.diligence">
+          <ion-icon><img src="assets/imgs/type-icon.png" /></ion-icon>
+          <div mat-line style="font-size: 15px; font-family: Gilroy-Light;">
+            <span style="
+                        color: #49158a;
+                        font-size: 15px;
+                        font-family: Gilroy-ExtraBold;
+                      ">DILIGENCIA</span>
+
+          </div>
+        </ion-item>
+      </ion-list>
+
+    </div>
+    <br />
+
+    <div style="
+                background: #f2f2f2;
+    width: 80%;
+    max-height: 202px;
+    margin: auto;
+    overflow-y: scroll;
+    border-radius: 20px;
+    padding: 5px;
+              ">
+       <ion-list style="text-align: left !important;
+       padding-top: 1px;
+       background: #f2f2f2;
+       /* height: 202px; */
+       border-bottom-left-radius: 20px;
+       border-bottom-right-radius: 20px;
+       width: 100%;
+       max-height: 202px;
+       overflow-y: scroll;">
+         <ion-item lines="none" *ngFor="let item of quotation.address_arr; let i = index" style="
+   margin: 0;
+   margin-bottom: 10px;
+   --background: #f2f2f2;">
+           <div class="address-btn text-center">
+             <img [src]="
+                 'assets/imgs/markers/' + az_arr[i] + '.png'
+               " style="width: 30px !important; height: 30px !important;" />
+           </div>
+
+           <div mat-line>
+             <fieldset style="
+                    border-radius: 12px;
+ border-color: #dfdfdf;
+ height: 100%;
+ padding-left: 20px;
+ font-size: 0.75em;  
+               ">
+               {{ (item.address)  }}
+             </fieldset>
+           </div>
+         </ion-item>
+       </ion-list>
+
+    </div>
+  </div>
+</ion-content>
+<div class="col-md-11 col-lg-10 col-xl-8 m-auto" style="margin: auto;">
+  <ion-button mode="ios" routerLink="/tabs/select-address">
+    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+    <ion-icon name="arrow-left"></ion-icon>
+    Atrás
+  </ion-button>
+  <ion-button mode="ios" (click)="next()">
+    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+    Siguiente
+  </ion-button>
+</div>

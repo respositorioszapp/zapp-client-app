@@ -1,0 +1,37 @@
+<ion-content class="gray-background" >
+  <div>
+    <div class="ion-text-center" style="margin-top:10px;">
+      <img [src]="image" style="border-radius: 100%;
+      width: 100px;
+      height: 100px;" (click)="takePhoto()">
+      <ion-icon name="camera" style="font-size: 1.8em;
+    margin-left: -26px;
+    color: #49158c;"></ion-icon>
+    </div>
+    <ion-card-header class="ion-text-center">
+      {{auth.user.name}}
+    </ion-card-header>
+  </div>
+  <ion-card mode="ios" style="min-height: 40%;">
+    <ion-card-header class="ion-text-center">
+      Mi perfil
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item expand="block" lines="none"  (click)="goToPersonalInformation()">
+          <ion-label>Datos Personales</ion-label>
+          <ion-icon slot="end" name="arrow-forward-outline" color="primary"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" (click)="goToChangePassword()" >
+          <ion-label>Cambiar contraseña</ion-label>
+          <ion-icon slot="end" name="reload-outline" color="primary"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" (click)="goToAbout()" >
+          <ion-label>Acerca de la aplicación</ion-label>
+          <ion-icon slot="end" name="alert-circle-outline" color="primary"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

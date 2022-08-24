@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar mode="ios" style="position: relative;">
+    <ion-title style="position: absolute; left: 5px;bottom:14px">Calificar
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <h3 class="ion-text-center">ORDEN #{{order.id}}</h3>
+  <div style="width: 80%;
+  height: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+">
+    <!-- <ion-title>ROIBERT PEÑALOZA</ion-title> -->
+    <div style="text-align: center;
+   margin: auto;
+   width: 80%;
+   display: flex;
+   justify-content: center;">
+      <ion-avatar class="ion-text-center" style="    width: 200px;
+    height: 200px;
+    padding: 10px;
+    border: 0.5px solid #cccccc;
+">
+        <ion-img [src]="driver.photo_driver ? driver.photo_driver : 'assets/imgs/avatar.svg'"></ion-img>
+
+      </ion-avatar>
+    </div>
+    <ion-title class="ion-text-uppercase" style="font-weight: bold;margin-top: 10px;">{{driver.driver_name}}</ion-title>
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2" (click)="star('one')">
+            <ion-icon [name]="qualification.one ? 'star':'star-outline'" [ngClass]="{'yellow': qualification.one}"
+              style="font-size: 2em;
+          color: #b8bac0;transition: color ease 1s;"></ion-icon>
+          </ion-col>
+          <ion-col (click)="star('two')">
+            <ion-icon [name]="qualification.two ? 'star':'star-outline'" [ngClass]="{'yellow': qualification.two}"
+              style="font-size: 2em;
+          color: #b8bac0;transition: color ease 1s;"></ion-icon>
+          </ion-col>
+          <ion-col (click)="star('three')">
+            <ion-icon [name]="qualification.three ? 'star':'star-outline'" [ngClass]="{'yellow': qualification.three}"
+              style="font-size: 2em;
+          color: #b8bac0;transition: color ease 1s;"></ion-icon>
+          </ion-col>
+          <ion-col (click)="star('four')">
+            <ion-icon [name]="qualification.four ? 'star':'star-outline'" [ngClass]="{'yellow': qualification.four}"
+              style="font-size: 2em;
+          color: #b8bac0;transition: color ease 1s;"></ion-icon>
+          </ion-col>
+          <ion-col (click)="star('five')">
+            <ion-icon [name]="qualification.five ? 'star':'star-outline'" [ngClass]="{'yellow': qualification.five}"
+              style="font-size: 2em;
+          color: #b8bac0;transition: color ease 1s;"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <h4>Opinión</h4>
+    <ion-textarea style="text-align: start;
+    border: 0.5px solid #ccc;
+    border-radius: 20px;
+    padding: 5px;" [(ngModel)]="opinion"></ion-textarea>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <div style="display: flex;">
+    <ion-button color="primary" fill="outline" (click)="dismiss()" style="width: 50%;">Cancelar</ion-button>
+    <ion-button color="primary" style="width: 50%;" (click)="scoreIt()">Calificar</ion-button>
+  </div>
+</ion-footer>

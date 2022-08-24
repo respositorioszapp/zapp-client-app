@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "109401557615",
+    "firebase_url": "https://zapplogistica-76f1a-default-rtdb.firebaseio.com",
+    "project_id": "zapplogistica-76f1a",
+    "storage_bucket": "zapplogistica-76f1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109401557615:android:ed317a7b5ae71b534a9b9a",
+        "android_client_info": {
+          "package_name": "com.zapp.client.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109401557615-0u5mvavjg3apsdmidr5hkkaccgrkmqn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsV2CXMPj_n4nyno01QpXxz5ua0VRVVpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109401557615-0u5mvavjg3apsdmidr5hkkaccgrkmqn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109401557615:android:ca165b1df17b85a84a9b9a",
+        "android_client_info": {
+          "package_name": "com.zapp.driver.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109401557615-0u5mvavjg3apsdmidr5hkkaccgrkmqn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsV2CXMPj_n4nyno01QpXxz5ua0VRVVpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109401557615-0u5mvavjg3apsdmidr5hkkaccgrkmqn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

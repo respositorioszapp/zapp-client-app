@@ -1,0 +1,17 @@
+<ng-container *ngFor="let item of driver">
+
+  <ion-item >
+    <ion-avatar slot="start">
+      <img [src]="photo?photo:'assets/imgs/avatar.svg'" (click)="viewImage(photo)">
+    </ion-avatar>
+    <ion-text>
+      {{item.driver_name}}
+    </ion-text>
+  </ion-item>
+  <ion-item lines="none" (click)="callANumber(item.driver_phone)" *ngIf="order.status_order!=25">
+    <ion-text slot="start">
+      {{item.driver_phone}}
+    </ion-text>
+    <ion-button expand="block" mode="ios" color="success" style="--border-radius: 50%;" slot="end"><ion-icon name="call-outline"></ion-icon></ion-button>
+  </ion-item>
+</ng-container>

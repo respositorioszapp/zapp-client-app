@@ -1,0 +1,243 @@
+<ion-header>
+  <ion-toolbar color="primary" style="position: relative;" mode="ios">
+    <ion-item lines="none" color="primary">
+      <ion-title>{{driver.driver}}
+      </ion-title>
+      <ion-button slot="end" style="width: 40px;" (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+
+  </ion-toolbar>
+</ion-header>
+<!-- <div #map id="mapDriver" *ngIf="!disable" style="width: 100%;height: 30%;"></div> -->
+<ion-content style="height: 100%;" *ngIf="!disable" [fullscreen]="true" >
+
+  <div class="row justify-content-center" style="margin-right: 0;
+  margin-left: 0; width: 100%;">
+    <div *ngFor="let item of driver.address_array; let i = index" class="addresstask">
+
+      <div style="display: flex; flex-direction: column; width: 100%;">
+        <ion-button fill="clear" size="small" class="favorite" [ngClass]="{'favoactive': item.favorite}" style="" (click)="saveFavoriteAddress(item)">
+          <ion-icon name="star" color="warning" slot="icon-only"></ion-icon>
+        </ion-button>
+        <div class="addresstask-icon text-center">
+          <ion-button shape="round" size="small" class="mat-elevation-z0" [disabled]="disable" (click)="rm(i)" style="width: 100%;
+          height: 100%;">
+            {{item.index}}
+          </ion-button>
+        </div>
+        <button mat-stroked-button class="addresstask-address-btn" [ngClass]="{'selected': item.selected}"
+          (click)="openDialog(item ,i)" style="
+      word-wrap: break-word !important;
+      font-family: 'Gilroy-Light';
+      border-top: 0.5px solid rgb(218 218 218);
+border-right: 0.5px solid rgb(218 218 218);
+border-left: 0.5px solid rgb(218 218 218);  
+    ">
+          {{
+      (item.address
+        ? item.address
+        : "Digita aquí dirección de " +
+          ((item.index - 1) % 2 == 0 ? "origen" : "destino"))
+    }}
+        </button>
+
+        <textarea class="addresstask-task autocompleteOff" autocomplete="off" [(ngModel)]="item.description" [placeholder]="
+      i % 2 == 0
+        ? 'Digita aquí las instrucciones de la dirección de origen'
+        : 'Digita aquí las instrucciones  de la dirección de destino'
+    " cols="30" rows="2" maxlength="500" [disabled]="disable" style="margin-bottom: 10px;margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: 0.5px solid rgb(218 218 218);">
+  </textarea>
+        <div style="display: flex; ">
+          <textarea autocomplete="off" style="width: 50%; margin-right: 2%;border: 0.5px solid rgb(218 218 218);"
+            class="addresstask-task autocompleteOff" [(ngModel)]="item.contact_name" [disabled]="disable"
+            placeholder="Nombre del contacto" cols="30" rows="2" maxlength="500">
+  </textarea>
+          <input type="number" autocomplete="off" class="addresstask-task autocompleteOff" [disabled]="disable"
+            [(ngModel)]="item.contact_phone" placeholder="Telefono del contacto" onkeydown="javascript: return event.keyCode === 8 ||
+          event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+            style="width: 50%;border: 0.5px solid rgb(218 218 218);padding: 0 5px;" />
+          <!-- <textarea minlength="7" maxLength="10" style="width: 50%;border: 0.5px solid rgb(218 218 218);" cols="30"
+          rows="2" maxlength="500">
+  </textarea> -->
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row justify-content-center" style="width: 100%;">
+      <div class="col-sm-6 ion-text-center w-50" style="padding: 0 10px" >
+        <h4 class="ion-text-center">Hora Inicio
+        </h4>
+        <ion-item class="input-text date" >
+          <label  >{{time.start_time_military_format | dateFormatHour:true }} </label>
+          <ion-datetime displayFormat="hh:mm A" [(ngModel)]="time.start_time_military_format" (ngModelChange)="changeHour()" class="hidden" #init cancelText="Cancelar" doneText="Guardar" mode="ios"
+             ></ion-datetime>
+          <ion-button  fill="clear" slot="end"  style="padding: 0;
+          margin: 0;" (click)="changeTime(time.start_time_military_format, 'start_time_military_format')" >
+            <ion-icon name="alarm-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+      <div class="col-sm-6 ion-text-center w-50" style="padding: 0 10px">
+        <h4 class="ion-text-center">Hora Fin
+        </h4>
+        <ion-item class="input-text date" >
+          <label  >{{time.departure_time_military_format | dateFormatHour:true }} </label>
+          <ion-datetime class="input-text hidden" [(ngModel)]="time.departure_time_military_format" (ngModelChange)="changeHour()" displayFormat="hh:mm A" #end cancelText="Cancelar" doneText="Guardar" mode="ios"
+             ></ion-datetime>
+          <ion-button  fill="clear" slot="end"  style="padding: 0;
+          margin: 0;"  (click)="changeTime(time.departure_time_military_format, 'departure_time_military_format')">
+            <ion-icon name="alarm-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+  
+      </div>
+      <div class="col-md-12 col-lg-10 col-xl-10 align-div box" style=" ">
+        <div class="small-box bg-aqua">
+          <a style="font-size: 16px;
+          font-weight: bold;
+          font-family: Gilroy-Light;" href="#" class="small-box-footer">Horas</a>
+          <div class="inner">
+            <h3 style="font-family: Gilroy-ExtraBold;" id="horas">{{difference}}</h3>
+          </div>
+          <!-- <div class="icon" style="font-size:20px; top:10px;">
+            <mat-icon>credit_card</mat-icon>
+          </div> -->
+
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-10 col-xl-10 align-div box" >
+        <div class="small-box bg-aqua">
+          <a style="font-size: 16px;
+          font-weight: bold;
+          font-family: Gilroy-Light;" href="#" class="small-box-footer">Precio</a>
+          <div class="inner">
+            <h3 style="font-family: Gilroy-ExtraBold;" id="horas">{{getTotal()}}</h3>
+          </div>
+          <!-- <div class="icon" style="font-size:20px; top:10px;">
+            <mat-icon>credit_card</mat-icon>
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+<ion-content [fullscreen]="true" *ngIf="disable">
+  <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="viewEvent(order)">
+    <ion-fab-button color="primary">
+      <ion-icon name="chatbox-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div #map id="mapDriver" *ngIf="disable" style="width: 100%;height: 100%;"></div>
+</ion-content>
+<ion-footer [translucent]="true" *ngIf="disable">
+  <ion-card class="card-absolute-normal white-gray-background" [ngClass]="{'min-he': order.status_order == 25}">
+    <div class="view-detail" (click)="viewMore()">
+      Mensajero {{driver.index}}
+    </div>        
+    <ion-card-content class="ion-no-padding" *ngIf="view_more">
+      <div >
+        <ion-toolbar
+          *ngIf="driverOb"
+          class="toolbar">
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <ion-img [src]="driverOb.photo_driver"
+                (click)="viewImage(driverOb.photo_driver)"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <p class=" black-color-text" style="font-family: 'Gilroy-ExtraBold' !important;">{{this.order.drivers[0].driver_name}} </p>
+              
+            </ion-label>
+
+            <ion-icon style="display: none;" name="call-outline" (click)="callANumber(driverOb.driver_phone)" slot="end"
+              color="success" size="large"></ion-icon>
+              <div [class]="'status ' + store_states[order.status_order].class"  *ngIf="store_states[order.status_order]">
+                {{store_states[order.status_order].message}}
+              </div>
+          </ion-item>
+          
+
+        </ion-toolbar>
+        <div  class="min-he" style="min-height: 200px;
+        max-height: 300px;">
+
+          <div style="    max-height: 235px;
+          overflow-y: scroll;">
+            <ion-card  style="    border-radius: 20px;
+            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-top: 5px;
+            box-shadow: none;">
+              <ion-card-content class="row" style="padding-top: 3px;
+              padding-bottom: 3px;">
+                <h2 class="ion-text-center" style="width: 100%;">Horas {{driver.number_of_hours}}</h2>
+                
+                <p style="width: 100%;">Dirección de inicio</p>
+                <p style=" font-size: 0.8em;width: 100%;font-weight: bold;">
+                <span style="color: black;
+                  font-weight: 900;
+                  font-family: 'Gilroy-ExtraBold' !important;">
+                  {{driver.address}}
+                  </span>
+                </p>
+                <p style="font-size: 0.8em;width: 100%;">Hora de inicio:
+                  <span style="color: black;
+                  font-weight: 900;
+                  font-family: 'Gilroy-ExtraBold' !important;">
+                  {{driver.start_time}}
+                  </span>
+                   
+                  </p>
+                <p style="font-size: 0.8em;width: 100%;">Hora de finalización: 
+                  <span style="color: black;
+                  font-weight: 900;
+                  font-family: 'Gilroy-ExtraBold' !important;">
+                  {{driver.departure_time}}
+                  </span>
+                </p>
+                <ng-container >
+                  <div class="time" *ngIf="driver.timer" style="width: 100%;
+                  text-align: center;
+                  color: black;
+                  font-weight: 900;
+                  font-family: 'Gilroy-ExtraBold' !important;" >
+                    <span id="hms" style="color: black;
+                    font-weight: 900;
+                    font-size: 2em;
+                    font-family: 'Gilroy-ExtraBold' !important;
+                ">{{driver.timer.hours >9? driver.timer.hours:'0'+driver.timer.hours}}:{{driver.timer.minutes >9? driver.timer.minutes:'0'+driver.timer.minutes}}:{{driver.timer.seconds >9? driver.timer.seconds:'0'+driver.timer.seconds}}</span>
+                  </div>
+                  <br>
+                  
+                </ng-container>
+               
+
+              </ion-card-content>
+
+            </ion-card>
+          </div>
+          <div class="total">
+            <ion-label><span>Total a pagar: </span>{{order.total|
+              currency:'':'symbol':'1.0' }}</ion-label>
+          </div>
+        </div>
+      </div>
+      
+
+
+    </ion-card-content>
+
+  </ion-card>
+</ion-footer>
+<ion-button style="" *ngIf="!disable" (click)="save()" color="primary" expand="block">
+  Guardar</ion-button>

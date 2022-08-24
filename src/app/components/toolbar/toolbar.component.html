@@ -1,0 +1,55 @@
+<ion-item class="toolbar">
+  <ng-container *ngIf="!auth.back_button;else name">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" class="ion-no-padding">
+          <ion-item class="address-loaction" lines="none" (click)="showMap()">
+            <ion-icon name="location-icon" class="button-location"></ion-icon>
+            <ion-label >{{auth.person.location? auth.person.location.address:''}}</ion-label>
+            <ion-icon  name="caret-down-outline" style="    "></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2" offset="4" >
+          <ion-tab-button (click)="goToOffers()" class="ion-no-padding">
+            <ion-icon name="promos"></ion-icon>
+            <ion-label style="font-size: 0.7em;
+            margin: 0;">Promos</ion-label>
+          </ion-tab-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+  <ng-template #name>
+    <ion-grid >
+      <ion-row>
+        <ion-col size="2">
+          <ion-button fill="clear" size="small"  (click)="back()">
+            <ion-icon name="back" style="color: #49158c;
+              font-size: 1.3em;"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="7" style="padding:0;" > 
+          <ion-item class="address-loaction" lines="none" (click)="showMap()">
+            <ion-icon name="location-icon" class="button-location"></ion-icon>
+            <ion-label >{{auth.person.location ? auth.person.location.address: ''}}</ion-label>
+            <ion-icon  name="caret-down-outline" class="select" ></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2" offset="1" class="ion-text-right" style="position: relative;">
+          <ion-button fill="clear" (click)="viewCart()">
+            <ion-icon name="cart-sp"></ion-icon>
+            <ion-badge class="cart-items" *ngIf="!auth.person?.hide_cart && this.auth.person?.cart_items && this.auth.person?.cart_items.length > 0 " style="
+               ">{{this.auth.person.quantity}}</ion-badge>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+  </ng-template>
+  <!-- <ion-buttons slot="end" style="    margin-left: 0;">
+    <img src="assets/imgs/location-2.png" alt="" style="width: 20px;margin: 0;
+          margin-right: 5px;" >
+   
+  </ion-buttons> -->
+
+</ion-item>

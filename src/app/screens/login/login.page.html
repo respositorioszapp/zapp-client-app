@@ -1,0 +1,69 @@
+<ion-content class="ion-padding warning-gradient">
+  <div class="ion-text-center  ion-padding-bottom" style="margin-top: 90px;">
+    <img src="assets/imgs/logo zapp.png" style="">
+  </div>
+  <div style="width: 100%;
+  margin: 25% auto;">
+    <form [formGroup]="loginData" (submit)="send()" novalidate>
+      <ion-item lines="none" class="input-text ion-margin-top ion-margin-bottom">
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-input type="text" placeholder="Email" autocomplete="new-password" formControlName="email" required>
+        </ion-input>
+
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf=" controls.email.dirty && controls.email.touched && controls.email.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.email.errors.required">Email es requerido</ion-label>
+        <ion-label *ngIf="controls.email.errors.email">Debe ser un email válido</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="input-text ion-margin-top ion-margin-bottom">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-input [type]="view ?'text': 'password'" placeholder="Password" formControlName="password"
+          autocomplete="new-password" required>
+        </ion-input>
+        <ion-icon [name]="view ? 'eye-outline': 'eye-off-outline'" slot="end" (click)="setView()"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" class="danger-color-text"
+        *ngIf="controls.password.dirty && controls.password.touched && controls.password.errors">
+        <ion-icon name="alert-circle" slot="start" class="danger-color-text"></ion-icon>
+        <ion-label *ngIf="controls.password.errors.required">La contraseña es requerida</ion-label>
+        <ion-label *ngIf="controls.password.errors.minlength || controls.password.errors.maxlength">La contraseña debe
+          ser
+          de 8 a 16 caracteres</ion-label>
+
+      </ion-item>
+
+      <ion-item lines="none">
+        <!-- <ion-button fill="clear" expand="block" mode="ios" class="grey-color" routerLink="/forgot-password">
+          ¿Olvidaste tu contraseña?
+        </ion-button> -->
+        <span class="button-password" routerLink="/forgot-password">¿Olvidaste tu contraseña?</span>
+        <span class="button-signup" routerLink="/select-type">REGISTRARSE</span>
+      </ion-item>
+
+      <ion-button type="submit" expand="block" mode="ios" color="primary" class="ion-margin-bottom button-login">
+        INICIAR SESIÓN
+      </ion-button>
+      <ion-item lines="none">
+        <div class="ion-text-center" style="width: 100%;">
+          O
+        </div>
+      </ion-item>
+      <ion-button expand="block" mode="ios" fill="outline" class="ion-margin-bottom button-general"
+        (click)="signinInvited()">
+        ENTRAR COMO INVITADO
+      </ion-button>
+      <!-- <ion-button fill="outline" expand="block"  mode="ios" class="button-login"  routerLink="/select-type" >
+        REGISTRARSE
+      </ion-button> -->
+      <ion-button fill="outline" expand="block" mode="ios" class="button-general button-facebook"
+        (click)="loginFacebook()">
+        INICIAR SESIÓN CON FACEBOOK
+      </ion-button>
+      <ion-button fill="outline" expand="block" mode="ios" class="button-general button-google" (click)="loginGoogle()">
+        INICIAR SESIÓN CON GOOGLE
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

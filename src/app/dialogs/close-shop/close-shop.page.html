@@ -1,0 +1,43 @@
+<ion-content>
+    <ion-button style="position: absolute;right: 0;top: 0;" fill="clear" (click)="dismiss()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+    <img [src]="image" *ngIf="image" [class]="imageClass" />
+    <ng-container *ngIf="color_title; else elseTemplate">
+        <h1 *ngIf="title"  [ngStyle]="{'color': color_title}">{{title}}</h1>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <h1 *ngIf="title"  >{{title}}</h1>
+    </ng-template>
+
+
+    <ng-container *ngIf="color_message;else otherColor">
+        <h2 [ngStyle]="{'color': color_message}" class="ion-text-center" [ngClass]="{'not-title': !title}">{{message}}</h2>
+    </ng-container>
+    <ng-template #otherColor>
+        <ng-container *ngIf="image;else name">
+            <h2 style="color: purple;" class="ion-text-center" [ngClass]="{'not-title': !title}">{{message}}</h2>
+        </ng-container>
+        <ng-template #name>
+            <h2 style="color: purple;   " class="ion-text-center not-image" [ngClass]="{'not-title': !title}">{{message}}</h2>
+        </ng-template>
+
+
+
+    </ng-template>
+
+    <ng-container *ngIf="modalWithButtons; else nobuttons">
+        <ion-item lines="none">
+            <ion-button color="light" class="buttons" (click)="dismiss()">
+                {{negativeText}}
+            </ion-button>
+            <ion-button slot="end" class="buttons" (click)="affirmative()">
+                {{affirmativeText}}
+            </ion-button>
+        </ion-item>
+    </ng-container>
+    <ng-template #nobuttons>
+        
+    </ng-template>
+    
+</ion-content>
